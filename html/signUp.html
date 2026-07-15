@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="no-referrer" />
+    <title>회원가입</title>
+  </head>
+  <body>
+    <header>
+      <h1><span aria-hidden="true">👤</span> 회원가입</h1>
+      <p>SKALA-FRONT 회원가입을 환영합니다.</p>
+      <p>‘(필수)’ 항목은 반드시 입력해야 합니다.</p>
+    </header>
+
+    <nav aria-label="바로가기">
+      <a href="index.html">← 홈으로</a>
+    </nav>
+
+    <main>
+      <form action="signUpResult.html" method="get">
+        <fieldset>
+          <legend>계정 정보</legend>
+
+          <p>
+            <label for="userId">아이디 (필수)</label><br />
+            <input
+              type="text"
+              id="userId"
+              name="userId"
+              placeholder="4~15자 영문+숫자"
+              pattern="[A-Za-z0-9]{4,15}"
+              autocomplete="username"
+              aria-describedby="userId-help"
+              required
+              aria-required="true"
+            />
+            <span id="userId-help">영문과 숫자 조합으로 4자 이상 15자 이하로 입력하세요.</span>
+          </p>
+
+          <p>
+            <label for="password">비밀번호 (필수)</label><br />
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="8자 이상 입력"
+              minlength="8"
+              autocomplete="new-password"
+              aria-describedby="password-help"
+              required
+              aria-required="true"
+            />
+            <span id="password-help">8자 이상, 영문과 숫자를 함께 사용하는 것을 권장합니다.</span>
+          </p>
+
+          <p>
+            <label for="email">이메일</label><br />
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="example@skala.com"
+              autocomplete="email"
+            />
+          </p>
+        </fieldset>
+
+        <fieldset>
+          <legend>개인 프로필 정보</legend>
+
+          <p>
+            <label for="name">이름</label><br />
+            <input type="text" id="name" name="name" placeholder="홍길동" autocomplete="name" />
+          </p>
+
+          <p>
+            <label for="birth">생년월일</label><br />
+            <input type="date" id="birth" name="birth" autocomplete="bday" />
+          </p>
+
+          <fieldset>
+            <legend>성별</legend>
+            <p>
+              <input type="radio" id="gender-male" name="gender" value="male" checked />
+              <label for="gender-male">남성</label>
+              <input type="radio" id="gender-female" name="gender" value="female" />
+              <label for="gender-female">여성</label>
+              <input type="radio" id="gender-none" name="gender" value="none" />
+              <label for="gender-none">선택 안 함</label>
+            </p>
+          </fieldset>
+
+          <fieldset>
+            <legend>관심 분야 (중복 선택 가능)</legend>
+            <p>
+              <input type="checkbox" id="interest-frontend" name="interests" value="frontend" />
+              <label for="interest-frontend">웹 프론트엔드 (<span lang="en">Vue.js/HTML</span>)</label>
+              <br />
+              <input type="checkbox" id="interest-uiux" name="interests" value="uiux" />
+              <label for="interest-uiux"><span lang="en">UI/UX</span> 디자인 표준</label>
+              <br />
+              <input type="checkbox" id="interest-backend" name="interests" value="backend" />
+              <label for="interest-backend">백엔드 &amp; 데이터베이스</label>
+              <br />
+              <input type="checkbox" id="interest-cloud" name="interests" value="cloud" />
+              <label for="interest-cloud">클라우드 &amp; 인프라</label>
+            </p>
+          </fieldset>
+
+          <p>
+            <label for="referral">가입 경로</label><br />
+            <select id="referral" name="referral">
+              <option value="">-- 선택해 주세요 --</option>
+              <option value="search">검색 엔진</option>
+              <option value="friend">지인 추천</option>
+              <option value="sns">SNS 광고</option>
+              <option value="etc">기타</option>
+            </select>
+          </p>
+        </fieldset>
+
+        <fieldset>
+          <legend>자기소개</legend>
+          <p>
+            <label for="intro">나를 표현하는 한 줄 소개 또는 가입 인사</label><br />
+            <textarea
+              id="intro"
+              name="intro"
+              rows="5"
+              maxlength="200"
+              placeholder="여기에 내용을 입력하세요 (최대 200자)"
+              aria-describedby="intro-help"
+            ></textarea>
+            <span id="intro-help">최대 200자까지 입력할 수 있습니다.</span>
+          </p>
+        </fieldset>
+
+        <p>
+          <button type="submit">동의하고 회원가입</button>
+          <button type="reset">다시 작성</button>
+        </p>
+      </form>
+    </main>
+
+    <footer>
+      <p><small>&copy; 2026 SKALA-FRONT · 노영오</small></p>
+    </footer>
+  </body>
+</html>
