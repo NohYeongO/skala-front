@@ -58,3 +58,28 @@
   /* 레이아웃 */
   --container-width: 64rem;
 }
+
+/* OS가 다크 모드면 자동 적용 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #14131c;
+    --color-surface: #1e1c29;
+    --color-surface-alt: #272438;
+    --color-text: #f0eef7;
+    --color-muted: #b6b1cf;
+    --color-border: #322e45;
+
+    --color-accent: #a78bfa;
+    --color-accent-hover: #c4b5fd;
+    --color-accent-contrast: #16121f;
+    --color-accent-soft: #2a2444;
+    --color-accent-border: #4c3f7a;
+
+    --color-mark-bg: #b45309;
+    --color-mark-text: #fff7ed;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 6px 16px rgba(0, 0, 0, 0.45);
+    --shadow-lg: 0 18px 40px rgba(0, 0, 0, 0.55);
+  }
+}
