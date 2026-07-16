@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="../css/base.css" />
     <link rel="stylesheet" href="../css/components.css" />
     <link rel="stylesheet" href="../css/layout.css" />
+    <script src="../script/upDown.js" defer></script>
+    <script src="../script/grade.js" defer></script>
+    <script src="../script/bag.js" defer></script>
   </head>
   <body>
     <div class="container">
@@ -94,6 +97,27 @@
           <li>수·목·금 — 스마트 데이터 이해 및 활용</li>
         </ul>
         <p><a href="myClass.html">강의 시간표 전체 보기</a></p>
+      </section>
+
+      <section aria-labelledby="games-heading">
+        <h2 id="games-heading">미니 게임</h2>
+        <ul class="game-list">
+          <li>
+            <button type="button" id="upDownBtn">
+              업다운 게임 <span aria-hidden="true">🎮</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" id="gradeBtn">
+              성적 계산기 <span aria-hidden="true">📊</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" id="bagBtn">
+              내 가방 보기 <span aria-hidden="true">🎒</span>
+            </button>
+          </li>
+        </ul>
       </section>
 
       <section aria-labelledby="quicklink-heading">
