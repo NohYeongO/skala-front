@@ -365,6 +365,28 @@ button:active {
   transform: translateY(1px);
 }
 
+/* 미니 게임 버튼 */
+.game-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.game-list button {
+  width: 100%;
+  text-align: left;
+  background-color: var(--color-accent-soft);
+  color: var(--color-accent-hover);
+  border: 1px solid var(--color-accent-border);
+}
+
+.game-list button:hover {
+  background-color: var(--color-accent);
+  color: var(--color-accent-contrast);
+}
+
 /* 푸터 */
 .container > footer {
   padding-top: var(--space-4);
