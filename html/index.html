@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Welcome SKALA</title>
+    <script src="../script/theme.js"></script>
     <link rel="stylesheet" href="../css/tokens.css" />
     <link rel="stylesheet" href="../css/base.css" />
     <link rel="stylesheet" href="../css/components.css" />
@@ -11,6 +12,7 @@
     <script src="../script/upDown.js" defer></script>
     <script src="../script/grade.js" defer></script>
     <script src="../script/bag.js" defer></script>
+    <script type="module" src="../script/realtimeInfo.js"></script>
   </head>
   <body>
     <div class="container">
@@ -86,8 +88,18 @@
       </section>
 
       <section aria-labelledby="weather-heading">
-        <h2 id="weather-heading">오늘의 날씨</h2>
-        <p>실시간 날씨 정보는 준비 중입니다. (JavaScript 연동 예정)</p>
+        <h2 id="weather-heading">실시간 세계 날씨</h2>
+        <label for="city-select" class="sr-only">도시 선택</label>
+        <select id="city-select">
+          <option value="">-- 도시를 선택하세요 --</option>
+          <option value="seoul" data-lat="37.57" data-lon="126.98">대한민국 서울 KR</option>
+          <option value="tokyo" data-lat="35.68" data-lon="139.65">일본 도쿄 JP</option>
+          <option value="paris" data-lat="48.85" data-lon="2.35">프랑스 파리 FR</option>
+          <option value="newyork" data-lat="40.71" data-lon="-74.01">미국 뉴욕 US</option>
+          <option value="london" data-lat="51.51" data-lon="-0.13">영국 런던 GB</option>
+          <option value="sydney" data-lat="-33.87" data-lon="151.21">호주 시드니 AU</option>
+        </select>
+        <div id="weather-box" aria-live="polite"></div>
       </section>
 
       <section aria-labelledby="class-summary-heading">
