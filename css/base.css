@@ -112,9 +112,19 @@ mark {
   border: 0;
 }
 
-/* 네이티브 컨트롤도 OS 테마를 따르도록 */
+/* 네이티브 컨트롤도 현재 테마를 따르도록 */
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+  }
 }
 
 /* 모션 최소화 선호 대응 */
