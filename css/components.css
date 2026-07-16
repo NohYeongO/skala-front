@@ -387,11 +387,55 @@ button:active {
   color: var(--color-accent-contrast);
 }
 
+/* 실시간 날씨 위젯 */
+#weather-box {
+  margin-top: var(--space-3);
+}
+
+#weather-box h3 {
+  font-size: var(--fs-500);
+  margin-bottom: var(--space-2);
+}
+
+#weather-box p {
+  margin-block: var(--space-1);
+}
+
+.weather-coords {
+  font-size: var(--fs-300);
+  color: var(--color-muted);
+}
+
 /* 푸터 */
 .container > footer {
   padding-top: var(--space-4);
   border-top: 1px solid var(--color-border);
   text-align: center;
   color: var(--color-muted);
+}
+
+/* 다크모드 토글 */
+.theme-toggle {
+  position: fixed;
+  top: var(--space-4);
+  right: var(--space-4);
+  z-index: 50;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  font-size: 1.25rem;
+  line-height: 1;
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.05);
+  border-color: var(--color-accent);
 }
 
