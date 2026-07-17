@@ -1,0 +1,274 @@
+/* 전 페이지 공통 뼈대 — 헤더/푸터/스킵링크/테마 토글/앰비언트.
+   layout.js가 주입하는 마크업과 짝을 이룬다. */
+
+/* 본문 바로가기 */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 0.6rem 1rem;
+  background: var(--brand);
+  color: #fff;
+  border-radius: 0 0 var(--radius-sm) 0;
+}
+.skip-link:focus {
+  left: 0;
+}
+
+/* 슬림 헤더 */
+.site-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  max-width: 1180px;
+  margin-inline: auto;
+  padding: var(--space-4) var(--space-5);
+}
+.brand {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  font-size: var(--fs-500);
+  font-weight: 700;
+  color: var(--color-text);
+}
+.brand:hover {
+  text-decoration: none;
+}
+.brand__sub {
+  font-size: var(--fs-300);
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  color: var(--brand);
+}
+.site-nav {
+  margin-left: auto;
+}
+.site-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-1);
+}
+.site-nav a {
+  display: inline-block;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  color: var(--color-muted);
+  font-weight: 600;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+.site-nav a:hover {
+  color: var(--brand);
+  background: color-mix(in srgb, var(--brand) 12%, transparent);
+  text-decoration: none;
+}
+/* 현재 페이지 메뉴 강조 */
+.site-nav a[aria-current="page"] {
+  color: var(--brand);
+  background: color-mix(in srgb, var(--brand) 14%, transparent);
+}
+.site-header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* 헤더 인증 */
+.auth {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.auth__name {
+  font-weight: 700;
+  color: var(--color-text);
+}
+.btn-login {
+  color: var(--color-muted);
+  font-weight: 700;
+}
+.btn-login:hover {
+  color: var(--brand);
+  text-decoration: none;
+}
+.btn-signup {
+  display: inline-block;
+  padding: 0.45rem 1.1rem;
+  border-radius: 999px;
+  background: var(--brand);
+  color: #fff;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: filter 0.15s ease;
+}
+.btn-signup:hover {
+  filter: brightness(1.08);
+  text-decoration: none;
+}
+.btn-logout {
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface);
+  color: var(--color-muted);
+  font-weight: 700;
+  cursor: pointer;
+}
+.btn-logout:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+}
+
+/* 테마 토글 */
+.theme-toggle {
+  width: 2.2rem;
+  height: 2.2rem;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+.theme-toggle:hover {
+  border-color: var(--brand);
+}
+
+/* 섹션 라벨(eyebrow) — 전 페이지 공용 */
+.eyebrow {
+  font-size: var(--fs-300);
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  color: var(--brand);
+}
+
+/* 푸터 */
+.site-foot {
+  margin-top: var(--space-7);
+  border-top: 1px solid var(--color-border);
+}
+.foot {
+  max-width: 1180px;
+  margin-inline: auto;
+  padding: var(--space-6) var(--space-5);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+}
+.foot__brand {
+  font-weight: 700;
+  color: var(--color-text);
+}
+.foot__brand span {
+  margin-left: 0.35rem;
+  font-size: var(--fs-300);
+  letter-spacing: 0.18em;
+  color: var(--brand);
+}
+.foot__social {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: var(--space-3);
+}
+.foot__social li {
+  margin: 0;
+}
+.foot__social a {
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  color: var(--color-muted);
+  transition: color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+.foot__social a:hover {
+  color: var(--brand);
+  border-color: var(--brand);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+.foot__social svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+.foot__copy {
+  margin-left: auto;
+  color: var(--color-muted);
+}
+
+/* 앰비언트 — 상단에 은은한 브랜드 글로우 (테마 연동) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+    70% 45% at 50% 0%,
+    color-mix(in srgb, var(--brand) 12%, transparent),
+    transparent 70%
+  );
+}
+
+/* 스크롤 등장 (JS가 .reveal 부여 시에만 숨김 → no-JS 안전) */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── 반응형 (헤더/푸터) ── */
+@media (max-width: 786px) {
+  .site-header {
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-3);
+  }
+  .brand {
+    white-space: nowrap;
+  }
+  .site-header__actions {
+    margin-left: auto;
+  }
+  .site-nav {
+    order: 3;
+    width: 100%;
+    margin-left: 0;
+  }
+  .site-nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-header,
+  .foot {
+    padding-inline: var(--space-4);
+  }
+  .brand__sub {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
