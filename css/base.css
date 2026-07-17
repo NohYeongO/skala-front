@@ -10,6 +10,11 @@
   margin: 0;
 }
 
+/* hidden 속성이 display 지정보다 우선하도록 */
+[hidden] {
+  display: none !important;
+}
+
 html {
   -webkit-text-size-adjust: 100%;
 }

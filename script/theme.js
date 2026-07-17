@@ -48,7 +48,8 @@
   render();
 
   function mount() {
-    document.body.appendChild(btn);
+    const slot = document.querySelector("[data-theme-slot]");
+    (slot || document.body).appendChild(btn);
   }
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", mount);
