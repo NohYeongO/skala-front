@@ -4,14 +4,17 @@
 // 접근성: prefers-reduced-motion이면 아예 재생하지 않고, 세션당 1회만,
 //   아무 키·클릭으로 스킵 가능하며, 끝나면 포커스를 본문으로 옮긴다.
 //   오버레이는 aria-hidden 장식이라 스크린리더는 항상 본문을 읽는다.
-const KEY = "skala-intro-shown";
+// 목적지 라벨은 <body data-intro="..."> 에서 읽어 페이지마다 다르게 표시한다.
+const DEST = ((document.body && document.body.dataset.intro) || "TRAVEL").toUpperCase();
+// 세션 키를 페이지별로 두어 각 페이지가 세션당 한 번씩 인트로를 재생한다.
+const KEY = "skala-intro-" + (location.pathname.split("/").pop() || "index");
 const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const OVERLAY_HTML = `
   <div class="intro__ticket">
     <p class="intro__eyebrow">BOARDING PASS</p>
     <p class="intro__title">출국 수속</p>
-    <p class="intro__route"><b>ICN</b><span class="intro__plane" aria-hidden="true">✈</span><b>PROFILE</b></p>
+    <p class="intro__route"><b>ICN</b><span class="intro__plane" aria-hidden="true">✈</span><b>${DEST}</b></p>
     <div class="intro__bar"><span class="intro__fill"></span></div>
     <p class="intro__status">탑승 수속 중…</p>
   </div>
