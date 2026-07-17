@@ -103,6 +103,11 @@ mark {
   outline-offset: 2px;
   border-radius: 4px;
 }
+/* 포커스 관리용 컨테이너(인트로 후 main으로 포커스 이동 등)는 링을 숨긴다.
+   포커스 이동 자체는 유지되어 스크린리더는 본문을 그대로 안내한다. */
+[tabindex="-1"]:focus {
+  outline: none;
+}
 
 /* 스크린리더 전용 */
 .sr-only {
