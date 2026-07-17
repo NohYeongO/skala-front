@@ -51,6 +51,10 @@
     const slot = document.querySelector("[data-theme-slot]");
     (slot || document.body).appendChild(btn);
   }
+  // layout.js가 헤더를 주입한 직후 명시적으로 호출한다(마운트 순서 명확화).
+  // appendChild는 같은 노드를 재배치하므로 여러 번 불려도 버튼은 하나다.
+  window.mountThemeToggle = mount;
+  // layout이 없는 정적 슬롯 페이지(로그인/회원가입)를 위한 폴백
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", mount);
   } else {
