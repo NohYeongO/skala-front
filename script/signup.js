@@ -1,23 +1,56 @@
-// 회원가입 폼 제출 시 계정을 localStorage에 저장하고 자동 로그인한다.
-// 이미 있는 아이디면 막고 안내한다.
+// 회원가입 폼 검수 후 계정을 localStorage에 저장하고 자동 로그인한다.
+// 아이디·비밀번호를 조건식으로 검사해 명확한 안내를 보여주고,
+// 성공 시 비밀번호가 URL에 남지 않도록 JS로 완료 페이지로 이동한다.
 import { registerAccount, login } from "./auth.js";
 
 const form = document.querySelector('form[action="signUpResult.html"]');
 const msg = document.getElementById("signupMsg");
+const idInput = form?.querySelector("#userId");
+const pwInput = form?.querySelector("#password");
+
+// 아이디: 영문·숫자 4~15자
+const ID_RE = /^[A-Za-z0-9]{4,15}$/;
+// 비밀번호: 영문과 숫자를 모두 포함해 8자 이상
+const PW_RE = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;
+
+function fail(input, message) {
+  if (msg) msg.textContent = message;
+  input?.setAttribute("aria-invalid", "true");
+  input?.focus();
+}
+
+// 입력을 고치면 오류 표시를 지운다
+[idInput, pwInput].forEach((input) => {
+  input?.addEventListener("input", () => {
+    input.removeAttribute("aria-invalid");
+    if (msg) msg.textContent = "";
+  });
+});
 
 form?.addEventListener("submit", (event) => {
-  const id = form.querySelector("#userId")?.value.trim();
-  const password = form.querySelector("#password")?.value;
+  // 기본 전송(GET)을 막아 비밀번호가 URL·기록에 남지 않게 한다.
+  event.preventDefault();
+  if (msg) msg.textContent = "";
+
+  const id = idInput?.value.trim() || "";
+  const password = pwInput?.value || "";
   const name = form.querySelector("#name")?.value.trim() || id;
-  if (!id || !password) return; // 빈 값은 브라우저 required 검증에 맡긴다
+
+  if (!ID_RE.test(id)) {
+    fail(idInput, "아이디는 영문·숫자 4~15자로 입력해 주세요.");
+    return;
+  }
+  if (!PW_RE.test(password)) {
+    fail(pwInput, "비밀번호는 영문과 숫자를 함께 포함해 8자 이상으로 입력해 주세요.");
+    return;
+  }
 
   const result = registerAccount({ id, password, name });
   if (!result.ok) {
-    event.preventDefault();
-    if (msg) msg.textContent = result.reason;
-    form.querySelector("#userId")?.focus();
+    fail(idInput, result.reason); // 예: 이미 존재하는 아이디
     return;
   }
-  // 계정 생성 성공 → 자동 로그인한 뒤 폼이 signUpResult.html로 이동한다.
+
   login(id, password);
+  window.location.href = "signUpResult.html";
 });

@@ -9,6 +9,9 @@
 }
 
 :root {
+  /* 네이티브 컨트롤(달력·드롭다운·스크롤바)이 테마를 따르게 */
+  color-scheme: light dark;
+
   /* 색상 */
   --color-bg: #f6f6fb;
   --color-surface: #ffffff;
@@ -63,6 +66,14 @@
 
   /* 레이아웃 */
   --container-width: 64rem;
+}
+
+/* 수동 토글 시 네이티브 컨트롤도 해당 테마로 고정 */
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
 }
 
 /* 다크 테마 값 (수동 토글) */
