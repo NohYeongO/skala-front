@@ -4,12 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="referrer" content="no-referrer" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; object-src 'none'; base-uri 'self'"
+    />
     <title>회원가입</title>
     <script src="../script/theme.js"></script>
     <link rel="stylesheet" href="../css/tokens.css" />
     <link rel="stylesheet" href="../css/base.css" />
     <link rel="stylesheet" href="../css/components.css" />
     <link rel="stylesheet" href="../css/layout.css" />
+    <script type="module" src="../script/signup.js"></script>
   </head>
   <body>
     <div class="container">
@@ -77,7 +82,7 @@
 
           <p>
             <label for="name">이름</label><br />
-            <input type="text" id="name" name="name" placeholder="홍길동" autocomplete="name" />
+            <input type="text" id="name" name="name" placeholder="홍길동" autocomplete="name" maxlength="20" />
           </p>
 
           <p>
@@ -141,6 +146,8 @@
             <span id="intro-help">최대 200자까지 입력할 수 있습니다.</span>
           </p>
         </fieldset>
+
+        <p id="signupMsg" class="signup-msg" role="alert"></p>
 
         <p>
           <button type="submit">동의하고 회원가입</button>

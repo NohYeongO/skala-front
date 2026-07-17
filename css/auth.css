@@ -1,0 +1,160 @@
+/* 로그인/회원가입 등 인증 페이지 전용 스타일 (탑승 수속 카드) */
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 0.6rem 1rem;
+  background: var(--brand);
+  color: #fff;
+  border-radius: 0 0 var(--radius-sm) 0;
+}
+.skip-link:focus {
+  left: 0;
+}
+
+.auth-page {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: var(--space-5);
+  background: radial-gradient(
+      70% 55% at 50% 0%,
+      color-mix(in srgb, var(--brand) 18%, transparent),
+      transparent 70%
+    ),
+    var(--color-bg);
+}
+
+.auth-toggle {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+}
+.theme-toggle {
+  width: 2.2rem;
+  height: 2.2rem;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.theme-toggle:hover {
+  border-color: var(--brand);
+}
+
+.auth-card {
+  width: min(420px, 100%);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+.auth-card__head {
+  position: relative;
+  padding: var(--space-6);
+  background: linear-gradient(135deg, var(--brand), color-mix(in srgb, var(--brand) 55%, #12203f));
+  color: #fff;
+}
+.auth-card__head::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: repeating-linear-gradient(90deg, #fff 0 8px, transparent 8px 16px);
+  opacity: 0.4;
+}
+.auth-card__brand {
+  font-weight: 800;
+}
+.auth-card__brand span {
+  margin-left: 0.4rem;
+  font-size: var(--fs-300);
+  letter-spacing: 0.25em;
+  opacity: 0.85;
+}
+.auth-card__title {
+  margin-top: var(--space-3);
+  font-size: var(--fs-700);
+}
+.auth-card__sub {
+  margin-top: var(--space-1);
+  color: rgba(255, 255, 255, 0.85);
+}
+.auth-card__body {
+  padding: var(--space-6);
+}
+
+.auth-field {
+  margin-bottom: var(--space-4);
+}
+.auth-field label {
+  display: block;
+  margin-bottom: var(--space-1);
+  font-weight: 600;
+}
+.auth-field input {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+}
+.auth-field input:focus-visible {
+  border-color: var(--brand);
+  outline: 2px solid color-mix(in srgb, var(--brand) 40%, transparent);
+  outline-offset: 1px;
+}
+.auth-field input[aria-invalid="true"] {
+  border-color: #e5484d;
+}
+.auth-field .hint {
+  display: block;
+  margin-top: var(--space-1);
+  font-size: var(--fs-300);
+  color: var(--color-muted);
+}
+
+.auth-msg {
+  min-height: 1.4em;
+  margin-bottom: var(--space-3);
+  color: #e5484d;
+  font-weight: 600;
+}
+.auth-submit {
+  width: 100%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 999px;
+  background: var(--brand);
+  color: #fff;
+  font-size: var(--fs-500);
+  font-weight: 800;
+  cursor: pointer;
+  transition: filter 0.15s ease;
+}
+.auth-submit:hover {
+  filter: brightness(1.08);
+}
+.auth-alt {
+  margin-top: var(--space-4);
+  text-align: center;
+  color: var(--color-muted);
+}
+.auth-back {
+  display: block;
+  margin-top: var(--space-3);
+  text-align: center;
+  color: var(--color-muted);
+  font-weight: 600;
+}

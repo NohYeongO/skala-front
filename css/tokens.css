@@ -23,6 +23,12 @@
   --color-accent-soft: #ede9fe;
   --color-accent-border: #c4b5fd;
 
+  /* 여행 일지 팔레트 (라이트: 대비 확보용 진한 값) */
+  --route-gold: #d99413;
+  --weather-cyan: #0e7fb8;
+  --contrail: #6aa9ff;
+  --brand: #2f6bd8;
+
   --color-mark-bg: #fde68a;
   --color-mark-text: #422006;
 
@@ -74,6 +80,12 @@
   --color-accent-soft: #2a2444;
   --color-accent-border: #4c3f7a;
 
+  /* 여행 일지 팔레트 (다크: 밝은 값) */
+  --route-gold: #f5c451;
+  --weather-cyan: #38bdf8;
+  --contrail: #8ec5ff;
+  --brand: #6aa9ff;
+
   --color-mark-bg: #b45309;
   --color-mark-text: #fff7ed;
 
@@ -97,6 +109,12 @@
     --color-accent-contrast: #16121f;
     --color-accent-soft: #2a2444;
     --color-accent-border: #4c3f7a;
+
+    /* 여행 일지 팔레트 (다크: 밝은 값) */
+    --route-gold: #f5c451;
+    --weather-cyan: #38bdf8;
+    --contrail: #8ec5ff;
+    --brand: #6aa9ff;
 
     --color-mark-bg: #b45309;
     --color-mark-text: #fff7ed;

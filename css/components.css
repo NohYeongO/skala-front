@@ -439,3 +439,10 @@ button:active {
   border-color: var(--color-accent);
 }
 
+
+/* 회원가입 오류 메시지 */
+.signup-msg {
+  min-height: 1.4em;
+  color: #e5484d;
+  font-weight: 600;
+}

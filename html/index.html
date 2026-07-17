@@ -3,150 +3,144 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Welcome SKALA</title>
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; connect-src 'self' https://api.open-meteo.com; img-src 'self' data:; object-src 'none'; base-uri 'self'"
+    />
+    <title>노영오 · 여행 일지 포털</title>
     <script src="../script/theme.js"></script>
     <link rel="stylesheet" href="../css/tokens.css" />
     <link rel="stylesheet" href="../css/base.css" />
-    <link rel="stylesheet" href="../css/components.css" />
-    <link rel="stylesheet" href="../css/layout.css" />
-    <script src="../script/upDown.js" defer></script>
-    <script src="../script/grade.js" defer></script>
-    <script src="../script/bag.js" defer></script>
-    <script type="module" src="../script/realtimeInfo.js"></script>
+    <link rel="stylesheet" href="../css/home.css" />
+    <script type="module" src="../script/home.js"></script>
   </head>
   <body>
-    <div class="container">
-    <header>
-      <p>SKALA FRONT · 노영오의 개인 포털</p>
-      <h1>환영 인사</h1>
-      <p>스칼라에 오신 것을 환영합니다. 소개, 일정, 여행 기록을 한곳에서 만나보세요.</p>
+    <a class="skip-link" href="#main">본문 바로가기</a>
+
+    <header class="site-header">
+      <a class="brand" href="index.html"><b>노영오</b><span class="brand__sub">TRAVEL LOG</span></a>
+      <nav class="site-nav" aria-label="주요 메뉴">
+        <ul>
+          <li><a href="myProfile.html">나의 소개</a></li>
+          <li><a href="holiday.html">휴일 일과</a></li>
+          <li><a href="myClass.html">강의 일정</a></li>
+          <li><a href="myTrip.html">나의 여행지</a></li>
+        </ul>
+      </nav>
+      <div class="site-header__actions">
+        <span class="auth" id="authArea"></span>
+        <span data-theme-slot></span>
+      </div>
     </header>
 
-    <nav aria-label="주요 메뉴">
-      <ul>
-        <li><a href="myProfile.html">나의 소개</a></li>
-        <li><a href="holiday.html">나의 휴일 일과</a></li>
-        <li><a href="myClass.html">나의 강의 일정</a></li>
-        <li><a href="myTrip.html">나의 여행지</a></li>
-        <li><a href="signUp.html">회원가입</a></li>
-      </ul>
-    </nav>
+    <main id="main">
+      <h1 class="sr-only">노영오 여행 일지 · 세계 여행 궤적 포털</h1>
+      <section class="hero" aria-label="여행 궤적">
+        <div class="hero__map-cell">
+          <div class="hero__map" id="map">
+            <img class="hero__img" src="../media/world-map.png" alt="파란빛으로 빛나는 세계 지도" />
+            <!-- 마커·항로·비행기는 journeyMap이 주입 -->
+          </div>
+        </div>
+        <aside class="hero__log" id="log"><!-- Task 6 --></aside>
+        <p id="logStatus" class="sr-only" aria-live="polite"></p>
 
-    <main>
-      <section aria-labelledby="explore-heading">
-        <h2 id="explore-heading">둘러보기</h2>
-        <p>각 페이지를 둘러보고 필요한 기능을 이용해 보세요.</p>
-        <ul>
-          <li>
-            <article>
-              <h3><a href="myProfile.html">나의 소개</a></h3>
-              <p>취향과 올해 목표, 그리고 나를 설명하는 세 단어.</p>
-            </article>
+        <div class="hero__controls">
+          <button type="button" id="playJourney" class="btn-play" aria-pressed="false">
+            <span class="btn-play__icon" aria-hidden="true">▶</span>
+            <span class="btn-play__label">여정 재생</span>
+          </button>
+          <ol class="timeline" aria-label="연도별 여정">
+            <li><button type="button" data-year="2020">2020</button></li>
+            <li><button type="button" data-year="2023">2023</button></li>
+            <li><button type="button" data-year="2025">2025</button></li>
+            <li><button type="button" data-year="2026">2026</button></li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="deck" aria-labelledby="deck-heading">
+        <h2 id="deck-heading">둘러보기 <span class="eyebrow">EXPLORE</span></h2>
+        <ul class="deck__grid">
+          <li class="deck__card">
+            <a href="myProfile.html"><b>나의 소개</b><span>취향·올해 목표·나를 설명하는 세 단어</span></a>
           </li>
-          <li>
-            <article>
-              <h3><a href="holiday.html">나의 휴일 일과</a></h3>
-              <p>아침부터 저녁까지 이어지는 휴일 타임라인.</p>
-            </article>
+          <li class="deck__card">
+            <a href="holiday.html"><b>휴일 일과</b><span>아침부터 저녁까지 이어지는 타임라인</span></a>
           </li>
-          <li>
-            <article>
-              <h3><a href="myClass.html">나의 강의 일정</a></h3>
-              <p>이번 주 SKALA 4반 주간 시간표.</p>
-            </article>
+          <li class="deck__card">
+            <a href="myClass.html"><b>강의 일정</b><span>이번 주 SKALA 4반 주간 시간표</span></a>
           </li>
-          <li>
-            <article>
-              <h3><a href="myTrip.html">나의 여행지</a></h3>
-              <p>여행 사진과 음악, 브이로그를 담은 앨범.</p>
-            </article>
-          </li>
-          <li>
-            <article>
-              <h3><a href="signUp.html">회원가입</a></h3>
-              <p>SKALA 회원가입 폼.</p>
-            </article>
+          <li class="deck__card">
+            <a href="myTrip.html"><b>나의 여행지</b><span>사진·음악·브이로그를 담은 앨범</span></a>
           </li>
         </ul>
       </section>
 
-      <section aria-labelledby="highlight-heading">
-        <h2 id="highlight-heading">여행 하이라이트</h2>
-        <p>
-          오사카성의 야경부터 산티아고 순례길까지, 여행의 순간들을
-          <a href="myTrip.html">나의 여행지</a>에서 사진·음악·영상으로 만나보세요.
-        </p>
+      <section class="games arcade" aria-labelledby="games-heading">
+        <h2 id="games-heading">MINI GAME <span aria-hidden="true">🕹️</span> <span class="eyebrow">GAME CENTER</span></h2>
+        <div class="arcade__grid">
+          <button type="button" id="upDownBtn" class="cabinet">
+            <span class="cabinet__icon" aria-hidden="true">🎮</span>
+            <span class="cabinet__name">업다운 게임</span>
+            <span class="cabinet__cta">PLAY ▸</span>
+          </button>
+          <button type="button" id="gradeBtn" class="cabinet">
+            <span class="cabinet__icon" aria-hidden="true">📊</span>
+            <span class="cabinet__name">성적 계산기</span>
+            <span class="cabinet__cta">PLAY ▸</span>
+          </button>
+          <button type="button" id="bagBtn" class="cabinet">
+            <span class="cabinet__icon" aria-hidden="true">🎒</span>
+            <span class="cabinet__name">내 가방 보기</span>
+            <span class="cabinet__cta">PLAY ▸</span>
+          </button>
+        </div>
       </section>
     </main>
 
-    <aside aria-label="부가 정보">
-      <section aria-labelledby="profile-card-heading">
-        <h2 id="profile-card-heading">프로필</h2>
-        <p><strong>노영오</strong></p>
-        <p>도전과 실행력으로 성장하는 개발자입니다.</p>
-        <p><a href="myProfile.html">프로필 소개 더 보기</a></p>
-      </section>
-
-      <section aria-labelledby="weather-heading">
-        <h2 id="weather-heading">실시간 세계 날씨</h2>
-        <label for="city-select" class="sr-only">도시 선택</label>
-        <select id="city-select">
-          <option value="">-- 도시를 선택하세요 --</option>
-          <option value="seoul" data-lat="37.57" data-lon="126.98">대한민국 서울 KR</option>
-          <option value="tokyo" data-lat="35.68" data-lon="139.65">일본 도쿄 JP</option>
-          <option value="paris" data-lat="48.85" data-lon="2.35">프랑스 파리 FR</option>
-          <option value="newyork" data-lat="40.71" data-lon="-74.01">미국 뉴욕 US</option>
-          <option value="london" data-lat="51.51" data-lon="-0.13">영국 런던 GB</option>
-          <option value="sydney" data-lat="-33.87" data-lon="151.21">호주 시드니 AU</option>
-        </select>
-        <div id="weather-box" aria-live="polite"></div>
-      </section>
-
-      <section aria-labelledby="class-summary-heading">
-        <h2 id="class-summary-heading">이번 주 강의</h2>
-        <ul>
-          <li>월·화 — 데이터 분석을 위한 <span lang="en">Python</span> 이해</li>
-          <li>수·목·금 — 스마트 데이터 이해 및 활용</li>
-        </ul>
-        <p><a href="myClass.html">강의 시간표 전체 보기</a></p>
-      </section>
-
-      <section aria-labelledby="games-heading">
-        <h2 id="games-heading">미니 게임</h2>
-        <ul class="game-list">
+    <footer class="site-foot">
+      <div class="foot">
+        <p class="foot__brand"><b>노영오</b> <span>TRAVEL LOG</span></p>
+        <ul class="foot__social" aria-label="소셜 링크">
           <li>
-            <button type="button" id="upDownBtn">
-              업다운 게임 <span aria-hidden="true">🎮</span>
-            </button>
+            <a href="https://github.com/NohYeongO/skala-front" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+            </a>
           </li>
           <li>
-            <button type="button" id="gradeBtn">
-              성적 계산기 <span aria-hidden="true">📊</span>
-            </button>
+            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="블로그">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.6 2.5 15.4 0 18M12 3c-2.5 2.6-2.5 15.4 0 18"/></svg>
+            </a>
           </li>
           <li>
-            <button type="button" id="bagBtn">
-              내 가방 보기 <span aria-hidden="true">🎒</span>
-            </button>
-          </li>
-        </ul>
-      </section>
-
-      <section aria-labelledby="quicklink-heading">
-        <h2 id="quicklink-heading">빠른 링크</h2>
-        <ul>
-          <li>
-            <a href="https://github.com/NohYeongO/skala-front" rel="noopener noreferrer">
-              이 사이트 소스 코드 (GitHub)
+            <a href="mailto:nohyo05@gmail.com" aria-label="이메일">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
             </a>
           </li>
         </ul>
-      </section>
-    </aside>
-
-    <footer>
-      <p><small>&copy; 2026 SKALA-FRONT · 노영오</small></p>
+        <p class="foot__copy"><small>&copy; 2026 SKALA-FRONT · 노영오</small></p>
+      </div>
     </footer>
-    </div>
+
+    <dialog class="photo-modal" id="photoModal" aria-labelledby="photo-modal-cap">
+      <form method="dialog">
+        <button class="photo-modal__close" value="close" aria-label="닫기">✕</button>
+      </form>
+      <figure class="photo-modal__fig">
+        <img id="photo-modal-img" src="" alt="" />
+        <span class="photo-modal__stamp" id="photo-modal-stamp" aria-hidden="true"></span>
+        <figcaption id="photo-modal-cap" class="photo-modal__cap"></figcaption>
+      </figure>
+    </dialog>
+
+    <dialog class="game-modal" id="gameModal" aria-labelledby="game-modal-title">
+      <form method="dialog">
+        <button class="game-modal__close" value="close" aria-label="닫기">✕</button>
+      </form>
+      <h3 id="game-modal-title"></h3>
+      <div id="game-modal-body"></div>
+    </dialog>
   </body>
 </html>
