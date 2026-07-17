@@ -14,7 +14,7 @@ const OVERLAY_HTML = `
   <div class="intro__ticket">
     <p class="intro__eyebrow">BOARDING PASS</p>
     <p class="intro__title">출국 수속</p>
-    <p class="intro__route"><b>ICN</b><span class="intro__plane" aria-hidden="true">✈</span><b>${DEST}</b></p>
+    <p class="intro__route"><b>KWJ</b><span class="intro__plane" aria-hidden="true">✈</span><b>${DEST}</b></p>
     <div class="intro__bar"><span class="intro__fill"></span></div>
     <p class="intro__status">탑승 수속 중…</p>
   </div>

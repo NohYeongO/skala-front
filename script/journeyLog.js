@@ -72,7 +72,7 @@ function shellHTML(city) {
           <p class="bp__tag">${tag}</p>
         </div>
         <p class="bp__route">
-          <span class="bp__ep"><b class="bp__code">ICN</b><small>서울</small></span>
+          <span class="bp__ep"><b class="bp__code">KWJ</b><small>광주</small></span>
           <span class="bp__plane" aria-hidden="true">✈</span>
           <span class="bp__ep"><b class="flip" id="bp-dest" aria-label="${city.name} (${city.iata})"></b><small>${city.name}</small></span>
         </p>

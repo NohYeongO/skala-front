@@ -1,7 +1,7 @@
 // 홈 지도의 단일 데이터 소스. 마커·항로·로그·날씨가 여기서 파생된다.
 // x, y 는 지도 이미지 기준 퍼센트 좌표(격자 오버레이로 보정).
 export const CITIES = [
-  { key: "seoul",    name: "서울",     iata: "ICN", lat: 37.57,  lon: 126.98, type: "home",    year: null, media: null,                    x: 81,   y: 42 },
+  { key: "gwangju",  name: "광주",     iata: "KWJ", lat: 35.16,  lon: 126.85, type: "home",    year: null, media: null,                    x: 80.5, y: 43.5 },
   { key: "paris",    name: "파리",     iata: "CDG", lat: 48.85,  lon: 2.35,   type: "trip",    year: 2020, media: "france-2020.jpg",       x: 48,   y: 36 },
   { key: "santiago", name: "산티아고", iata: "SCQ", lat: 42.88,  lon: -8.54,  type: "trip",    year: 2020, media: "santiago-2020.jpg",     x: 44.5, y: 39 },
   { key: "taipei",   name: "타이베이", iata: "TPE", lat: 25.03,  lon: 121.57, type: "trip",    year: 2025, media: "Taipei-2025.jpg",       x: 80.5, y: 49 },
@@ -14,4 +14,4 @@ export const CITIES = [
 ];
 
 // 항로는 방문 순서(시간순). home + trip 노드를 이 순서로 잇는다.
-export const ROUTE = ["seoul", "paris", "santiago", "sydney", "taipei", "bali", "osaka", "nhatrang"];
+export const ROUTE = ["gwangju", "paris", "santiago", "sydney", "taipei", "bali", "osaka", "nhatrang"];
