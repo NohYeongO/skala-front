@@ -1,0 +1,130 @@
+/* 휴일 일과 — 하루 여정(항공 일정표) 타임라인 */
+
+.itinerary {
+  max-width: 52rem;
+  margin: var(--space-6) auto var(--space-7);
+  padding-inline: var(--space-5);
+  /* 한글은 어절 단위로 줄바꿈 */
+  word-break: keep-all;
+}
+
+.itinerary__intro {
+  margin-bottom: var(--space-6);
+}
+.itinerary__intro h1 {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin: 0 0 var(--space-3);
+  font-size: var(--fs-800);
+}
+.itinerary__intro p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: var(--fs-500);
+}
+
+/* 시간대 구간(아침/오후/저녁) */
+.leg {
+  margin-bottom: var(--space-5);
+  padding: var(--space-6);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+.leg__head {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin: 0 0 var(--space-5);
+  font-size: var(--fs-600);
+}
+.leg__icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+/* 여정 타임라인 */
+.itin {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.itin__stop {
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  gap: var(--space-4);
+  margin: 0;
+}
+.itin__time {
+  text-align: right;
+  font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-weight: 800;
+  font-size: var(--fs-500);
+  color: var(--color-text);
+  padding-top: 1px;
+}
+.itin__time span {
+  display: block;
+  margin-top: 0.15rem;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.72rem;
+  color: var(--color-muted);
+}
+/* 항로 라인 + 정차 노드 */
+.itin__body {
+  position: relative;
+  padding: 0 0 var(--space-5) var(--space-5);
+  border-left: 2px dashed color-mix(in srgb, var(--route-gold) 45%, transparent);
+}
+.itin__body::before {
+  content: "";
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--route-gold);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--route-gold) 20%, transparent);
+}
+/* 마지막 정차는 라인을 끊어 도착처럼 보이게 */
+.itin__stop:last-child .itin__body {
+  border-left-color: transparent;
+  padding-bottom: 0;
+}
+.itin__body p {
+  margin: 0;
+}
+.itin__body mark {
+  background: var(--color-mark-bg);
+  color: var(--color-mark-text);
+  padding: 0 0.25em;
+  border-radius: 4px;
+}
+
+/* ── 반응형 ── */
+@media (max-width: 560px) {
+  .leg {
+    padding: var(--space-5);
+  }
+  .itin__stop {
+    grid-template-columns: 68px 1fr;
+    gap: var(--space-3);
+  }
+  .itin__time {
+    font-size: var(--fs-400);
+  }
+}
+@media (max-width: 380px) {
+  .itinerary {
+    padding-inline: var(--space-4);
+  }
+  .itin__stop {
+    grid-template-columns: 60px 1fr;
+  }
+}
