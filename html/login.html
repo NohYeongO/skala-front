@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="referrer" content="no-referrer" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; object-src 'none'; base-uri 'self'"
+    />
+    <title>로그인 · 노영오 여행 일지</title>
+    <script src="../script/theme.js"></script>
+    <link rel="stylesheet" href="../css/tokens.css" />
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/auth.css" />
+    <script type="module" src="../script/login.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#loginForm">본문 바로가기</a>
+
+    <main class="auth-page">
+      <span class="auth-toggle" data-theme-slot></span>
+
+      <div class="auth-card">
+        <div class="auth-card__head">
+          <p class="auth-card__brand">노영오 <span>TRAVEL LOG</span></p>
+          <h1 class="auth-card__title">로그인</h1>
+          <p class="auth-card__sub">여정을 이어가려면 탑승권을 확인하세요 <span aria-hidden="true">✈️</span></p>
+        </div>
+
+        <div class="auth-card__body">
+          <form id="loginForm">
+            <div class="auth-field">
+              <label for="loginId">아이디</label>
+              <input
+                type="text"
+                id="loginId"
+                name="loginId"
+                autocomplete="username"
+                required
+                aria-required="true"
+              />
+            </div>
+            <div class="auth-field">
+              <label for="loginPw">비밀번호</label>
+              <input
+                type="password"
+                id="loginPw"
+                name="loginPw"
+                autocomplete="current-password"
+                required
+                aria-required="true"
+              />
+            </div>
+
+            <p id="loginMsg" class="auth-msg" role="alert"></p>
+
+            <button type="submit" class="auth-submit">로그인</button>
+          </form>
+
+          <p class="auth-alt">아직 회원이 아니신가요? <a href="signUp.html">회원가입</a></p>
+          <a class="auth-back" href="index.html">← 홈으로</a>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
