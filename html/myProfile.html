@@ -3,64 +3,166 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>나의 소개</title>
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; img-src 'self' data:; frame-src https://www.gong-dream.co.kr; object-src 'none'; base-uri 'self'"
+    />
+    <title>나의 소개 · 노영오 여행 일지</title>
     <script src="../script/theme.js"></script>
     <link rel="stylesheet" href="../css/tokens.css" />
     <link rel="stylesheet" href="../css/base.css" />
-    <link rel="stylesheet" href="../css/components.css" />
-    <link rel="stylesheet" href="../css/layout.css" />
+    <link rel="stylesheet" href="../css/chrome.css" />
+    <link rel="stylesheet" href="../css/profile.css" />
+    <script type="module" src="../script/profile.js"></script>
   </head>
   <body>
-    <div class="container">
-    <header>
-      <h1>나의 소개</h1>
-      <p>저를 이루는 취향과 올해의 목표, 그리고 세 단어로 저를 소개합니다.</p>
-    </header>
+    <header data-site-header></header>
 
-    <nav aria-label="바로가기">
-      <a href="index.html">← 홈으로</a>
-    </nav>
+    <main id="main" class="profile">
+      <section class="passport panel" aria-labelledby="passport-name">
+        <div class="passport__photo">
+          <img src="../media/profile.jpg" alt="정장을 입고 캐리어를 끌고 있는 노영오" />
+        </div>
+        <div class="passport__data">
+          <p class="passport__type">REPUBLIC OF SKALA · PASSPORT</p>
+          <h1 id="passport-name" class="passport__name">노영오 <span>NOH YEONGO</span></h1>
+          <p class="passport__tag">야구선수에서 개발자로, 그리고 SKALA까지 — 계속 도전하는 여정</p>
+          <dl class="passport__fields">
+            <div>
+              <dt>Field</dt>
+              <dd>개발자 / Developer</dd>
+            </div>
+            <div>
+              <dt>Base</dt>
+              <dd>Gwangju</dd>
+            </div>
+            <div>
+              <dt>Motto</dt>
+              <dd>도전 · 실행 · 협업</dd>
+            </div>
+          </dl>
+          <div class="passport__links">
+            <a class="passport__link" href="https://github.com/NohYeongO" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+            <a class="passport__link" href="https://velog.io/@nohyo05/posts" target="_blank" rel="noopener noreferrer">블로그 <span aria-hidden="true">↗</span></a>
+            <a class="passport__link" href="https://drive.google.com/file/d/1MO-R_Ckh9ebIiw8iQ3ovXc3hQd6mmNoG/view?usp=sharing" target="_blank" rel="noopener noreferrer">포트폴리오 <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+        <p class="passport__mrz" aria-hidden="true">
+          P&lt;SKALA&lt;NOH&lt;&lt;YEONGO&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+        </p>
+      </section>
 
-    <main>
-      <section>
-        <h2>내가 좋아하는 음식</h2>
-        <ul>
-          <li>김치찌개</li>
-          <li>타꼬야끼</li>
-          <li>규카츠</li>
-          <li>초밥</li>
-          <li>말차</li>
+      <section class="panel" aria-labelledby="stamps-h" data-reveal>
+        <h2 id="stamps-h">나를 설명하는 단어 <span class="eyebrow">VISA STAMPS</span></h2>
+        <ul class="stamps">
+          <li class="stamp stamp--journey">
+            <div class="journey">
+              <figure class="journey__shot journey__shot--baseball">
+                <span class="journey__crop">
+                  <img src="../media/baseball.jpg" alt="야구 선수 시절의 노영오" />
+                </span>
+                <figcaption>야구선수 <span>PAST</span></figcaption>
+              </figure>
+              <span class="journey__arrow" aria-hidden="true">✈</span>
+              <figure class="journey__shot journey__shot--now">
+                <span class="journey__crop">
+                  <img src="../media/profile.jpg" alt="정장 차림의 노영오" />
+                </span>
+                <figcaption>개발자 <span>NOW</span></figcaption>
+              </figure>
+            </div>
+            <p class="journey__note">
+              <b>도전</b> 프로 야구선수를 꿈꾸다 개발자로 방향을 틀었습니다. 현업에서 일하며 부족한 전공
+              지식을 채우기 위해 대학에 편입했고, 최근에는 Claude로 워크플로우를 설계하며
+              <abbr title="AI Transformation">AX</abbr>(AI 전환) 분야에 관심을 갖게 되었습니다. 지금은
+              SKALA에서 또 한 번의 새로운 도전을 이어가고 있습니다.
+            </p>
+          </li>
+          <li class="stamp stamp--embed">
+            <div class="stamp__head">
+              <b>실행력</b>
+              <span><strong>아이디어를 실제 서비스로 끝까지.</strong> 우후죽순 생겨나는 무인 프린트 카페 사이에서 간편결제·간편 설치·낮은 수수료를 무기로 경쟁력 있는 프린팅 서비스를 목표로 했습니다. 결제 확인과 원격 출력을 위해 WebSocket을 도입하고, 4개 플랫폼을 혼자 풀스택으로 개발했습니다.</span>
+              <ul class="tech">
+                <li>Electron 데스크톱</li>
+                <li>React Native 모바일</li>
+                <li>React 관리자</li>
+                <li>Spring 서버</li>
+                <li>WebSocket 결제·출력</li>
+              </ul>
+            </div>
+            <div class="embed">
+              <iframe
+                class="embed__frame"
+                title="공드림 웹사이트"
+                src="https://www.gong-dream.co.kr/"
+                loading="lazy"
+                sandbox="allow-scripts allow-popups"
+              ></iframe>
+            </div>
+            <div class="embed__links">
+              <a class="embed__link" href="https://www.gong-dream.co.kr/" target="_blank" rel="noopener noreferrer">웹사이트 <span aria-hidden="true">↗</span></a>
+              <a class="embed__link" href="https://apps.apple.com/kr/app/%EA%B3%B5%EB%93%9C%EB%A6%BC-new/id6761681959" target="_blank" rel="noopener noreferrer">App Store <span aria-hidden="true">↗</span></a>
+            </div>
+          </li>
+          <li class="stamp stamp--embed">
+            <div class="stamp__head">
+              <b>협업</b>
+              <span><strong>팀으로 더 멀리 가는 힘.</strong> 해커톤에서 수상하며 쌓은 좋은 협업 경험을 바탕으로, 실제 서비스 배포를 목표로 팀원들과 다시 뭉쳤습니다. 누구나 쓰는 투두(TODO) 서비스 ‘FRYDAY’를 함께 개발했고, 지금은 사용자 피드백과 발생하는 오류에 대응하며 업데이트를 이어가고 있습니다.</span>
+            </div>
+            <div class="fryday">
+              <img class="fryday__icon" src="../media/fryday.jpg" alt="FRYDAY 앱 아이콘" />
+              <div class="fryday__meta">
+                <p class="fryday__name">FRYDAY</p>
+                <p class="fryday__tag">바삭한 투두 리스트 · 백엔드 개발 · 지속 업데이트</p>
+              </div>
+            </div>
+            <div class="embed__links">
+              <a class="embed__link" href="https://www.instagram.com/fryday.official/" target="_blank" rel="noopener noreferrer">Instagram <span aria-hidden="true">↗</span></a>
+              <a class="embed__link" href="https://apps.apple.com/kr/app/fryday-%EB%B0%94%EC%82%AD%ED%95%9C-%ED%88%AC%EB%91%90-%EB%A6%AC%EC%8A%A4%ED%8A%B8/id6759564063" target="_blank" rel="noopener noreferrer">App Store <span aria-hidden="true">↗</span></a>
+            </div>
+          </li>
         </ul>
       </section>
 
-      <section>
-        <h2>올해 할 일</h2>
-        <ol>
-          <li>SKALA에서 좋은 성적 받기</li>
-          <li>AI 활용 역량 강화</li>
-          <li>CS 지식 향상</li>
-          <li>영어 공부</li>
-        </ol>
+      <section class="panel" aria-labelledby="food-h" data-reveal>
+        <h2 id="food-h">내가 좋아하는 음식 <span class="eyebrow">TASTE MAP</span></h2>
+        <ul class="foods">
+          <li class="food"><span class="food__emoji" aria-hidden="true">🍲</span> 김치찌개 <span class="food__flag" aria-hidden="true">🇰🇷</span></li>
+          <li class="food"><span class="food__emoji" aria-hidden="true">🥘</span> 제육볶음 <span class="food__flag" aria-hidden="true">🇰🇷</span></li>
+          <li class="food"><span class="food__emoji" aria-hidden="true">🥩</span> 규카츠 <span class="food__flag" aria-hidden="true">🇯🇵</span></li>
+          <li class="food"><span class="food__emoji" aria-hidden="true">🍣</span> 초밥 <span class="food__flag" aria-hidden="true">🇯🇵</span></li>
+          <li class="food"><span class="food__emoji" aria-hidden="true">🍵</span> 말차 <span class="food__flag" aria-hidden="true">🇯🇵</span></li>
+        </ul>
       </section>
 
-      <section>
-        <h2>나를 설명하는 단어들</h2>
-        <dl>
-          <dt>도전</dt>
-          <dd>야구선수에서 개발자로 전환, 현업에서 대학 편입, 그리고 SKALA까지.</dd>
-
-          <dt>실행력</dt>
-          <dd>아이디어를 바탕으로 실제 앱을 배포하고 운영해 왔습니다.</dd>
-
-          <dt>협업</dt>
-          <dd>팀 스포츠 경험과 다양한 팀 프로젝트를 통해 함께하는 법을 배웠습니다.</dd>
-        </dl>
+      <section class="panel" aria-labelledby="goals-h" data-reveal>
+        <h2 id="goals-h">올해 할 일 <span class="eyebrow">2026 ITINERARY</span></h2>
+        <ol class="goals">
+          <li class="goal">
+            <span class="goal__icon" aria-hidden="true">🎯</span>
+            <span class="goal__text">SKALA에서 좋은 성적 받고 취업하기</span>
+            <span class="goal__tag">진행 중</span>
+          </li>
+          <li class="goal">
+            <span class="goal__icon" aria-hidden="true">🤖</span>
+            <span class="goal__text">AI 활용 역량 강화</span>
+            <span class="goal__tag">진행 중</span>
+          </li>
+          <li class="goal">
+            <span class="goal__icon" aria-hidden="true">📚</span>
+            <span class="goal__text">CS 지식 향상</span>
+            <span class="goal__tag">진행 중</span>
+          </li>
+          <li class="goal">
+            <span class="goal__icon" aria-hidden="true">🌏</span>
+            <span class="goal__text">영어 공부</span>
+            <span class="goal__tag">진행 중</span>
+          </li>
+        </ol>
       </section>
     </main>
 
-    <footer>
-      <p><small>&copy; 2026 SKALA-FRONT · 노영오</small></p>
-    </footer>
-    </div>
+    <footer data-site-foot></footer>
   </body>
 </html>
