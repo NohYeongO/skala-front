@@ -1,12 +1,56 @@
 /* 출국 수속 인트로 — 여러 페이지가 공유 (intro.js가 JS로 삽입) */
+
+/* 팔레트 — 기본은 야간 비행, 라이트 테마는 낮 하늘 톤 */
+.intro,
+html.intro-pending {
+  --intro-bg: radial-gradient(circle at 50% 38%, #16294d, #0a1120 70%);
+  --intro-text: #fff;
+  --intro-accent: #f5c451;
+  --intro-track: rgba(255, 255, 255, 0.2);
+  --intro-status: rgba(255, 255, 255, 0.72);
+  --intro-stamp: #37d67a;
+}
+:root[data-theme="light"] .intro,
+:root[data-theme="light"].intro-pending {
+  --intro-bg: radial-gradient(circle at 50% 38%, #dbe8ff, #f2f5ff 70%);
+  --intro-text: #1c2a4d;
+  --intro-accent: #b45309;
+  --intro-track: rgba(28, 42, 77, 0.15);
+  --intro-status: rgba(28, 42, 77, 0.7);
+  --intro-stamp: #15803d;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) .intro,
+  :root:not([data-theme="dark"]).intro-pending {
+    --intro-bg: radial-gradient(circle at 50% 38%, #dbe8ff, #f2f5ff 70%);
+    --intro-text: #1c2a4d;
+    --intro-accent: #b45309;
+    --intro-track: rgba(28, 42, 77, 0.15);
+    --intro-status: rgba(28, 42, 77, 0.7);
+    --intro-stamp: #15803d;
+  }
+}
+
+/* 인트로 대기 — 첫 페인트부터 본문을 가려 인트로보다 페이지가 먼저 번쩍이는 걸 막는다.
+   주의: visibility:hidden은 배경도 안 그리므로 html의 그라디언트가 대신 보인다. */
+html.intro-pending {
+  background: var(--intro-bg);
+}
+html.intro-pending body {
+  visibility: hidden;
+}
+html.intro-pending body .intro {
+  visibility: visible;
+}
+
 .intro {
   position: fixed;
   inset: 0;
   z-index: 1000;
   display: grid;
   place-items: center;
-  background: radial-gradient(circle at 50% 38%, #16294d, #0a1120 70%);
-  color: #fff;
+  background: var(--intro-bg);
+  color: var(--intro-text);
   overflow: hidden;
   /* 안전장치: JS 해제가 실패해도 3초 뒤 자동으로 사라져 화면이 잠기지 않는다 */
   animation: intro-safety 0.4s ease 3s forwards;
@@ -32,7 +76,7 @@
   font-size: var(--fs-300);
   font-weight: 700;
   letter-spacing: 0.3em;
-  color: #f5c451;
+  color: var(--intro-accent);
 }
 .intro__title {
   margin: var(--space-2) 0 var(--space-4);
@@ -49,14 +93,14 @@
   letter-spacing: 0.1em;
 }
 .intro__plane {
-  color: #f5c451;
+  color: var(--intro-accent);
   animation: intro-fly 1.1s ease-in-out;
 }
 .intro__bar {
   width: min(320px, 70vw);
   height: 4px;
   margin: var(--space-5) auto 0;
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--intro-track);
   border-radius: 999px;
   overflow: hidden;
 }
@@ -64,13 +108,13 @@
   display: block;
   height: 100%;
   width: 0;
-  background: #f5c451;
+  background: var(--intro-accent);
   animation: intro-fill 1.1s ease forwards;
 }
 .intro__status {
   margin: var(--space-3) 0 0;
   font-size: var(--fs-300);
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--intro-status);
 }
 .intro__stamp {
   position: absolute;
@@ -78,9 +122,9 @@
   left: 50%;
   transform: translate(-50%, -50%) rotate(-14deg) scale(1.6);
   padding: 0.3rem 1.1rem;
-  border: 3px solid #37d67a;
+  border: 3px solid var(--intro-stamp);
   border-radius: 10px;
-  color: #37d67a;
+  color: var(--intro-stamp);
   font-weight: 800;
   letter-spacing: 0.24em;
   opacity: 0;

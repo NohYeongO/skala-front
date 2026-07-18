@@ -1,6 +1,5 @@
 // 나의 여행지 — 갤러리 라이트박스
 import "./layout.js"; // 공통 헤더/푸터
-import "./intro.js"; // 출국 수속 인트로 (KWJ ✈ ALBUM)
 import "./reveal.js"; // 스크롤 등장
 
 const lb = document.getElementById("lightbox");

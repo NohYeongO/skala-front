@@ -1,10 +1,8 @@
-// 공통 헤더/푸터를 페이지의 자리표시자에 주입한다.
-//   <header data-site-header></header>  <footer data-site-foot></footer>
-// 내용은 config.js에서만 관리하고, 현재 페이지 메뉴에 aria-current를 표시한다.
-// 마크업은 모두 정적(신뢰) 데이터라 innerHTML을 쓰고, 사용자 값이 들어가는
-// 인증 영역만 authUI가 textContent/DOM으로 안전하게 그린다.
-import { BRAND, NAV_LINKS, SOCIAL_LINKS } from "./config.js";
+// 공통 뼈대 강화 — 정적 헤더에 인증 표시·테마 토글을 얹고, 푸터는 config.js에서 생성.
+// 주의: innerHTML은 신뢰 데이터(푸터)만. 사용자 값은 authUI가 textContent로 그린다.
+import { BRAND, SOCIAL_LINKS } from "./config.js";
 import { renderAuth } from "./authUI.js";
+import "./games.js"; // 미니게임 플로팅 런처(전 페이지)
 
 const ICONS = {
   github:
@@ -14,26 +12,6 @@ const ICONS = {
   mail:
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>',
 };
-
-// 현재 파일명 (예: myTrip.html). 루트면 index.html로 본다.
-function currentPage() {
-  return location.pathname.split("/").pop() || "index.html";
-}
-
-function headerHTML() {
-  const here = currentPage();
-  const items = NAV_LINKS.map((link) => {
-    const active = link.href === here ? ' aria-current="page"' : "";
-    return `<li><a href="${link.href}"${active}>${link.text}</a></li>`;
-  }).join("");
-  return `
-    <a class="brand" href="${BRAND.href}"><b>${BRAND.name}</b><span class="brand__sub">${BRAND.sub}</span></a>
-    <nav class="site-nav" aria-label="주요 메뉴"><ul>${items}</ul></nav>
-    <div class="site-header__actions">
-      <span class="auth" id="authArea"></span>
-      <span data-theme-slot></span>
-    </div>`;
-}
 
 function footerHTML() {
   const social = SOCIAL_LINKS.map((s) => {
@@ -49,21 +27,10 @@ function footerHTML() {
 }
 
 function mount() {
-  // 본문 바로가기 — 항상 첫 포커스 요소
-  if (!document.querySelector(".skip-link")) {
-    const skip = document.createElement("a");
-    skip.className = "skip-link";
-    skip.href = "#main";
-    skip.textContent = "본문 바로가기";
-    document.body.prepend(skip);
-  }
-
+  // 헤더는 정적 마크업 — 세션 상태 반영과 테마 토글 마운트만 얹는다.
   const header = document.querySelector("[data-site-header]");
   if (header) {
-    header.classList.add("site-header");
-    header.innerHTML = headerHTML();
     renderAuth();
-    // 헤더에 [data-theme-slot]이 생겼으니 테마 토글을 바로 마운트 (타이밍 의존 제거)
     if (window.mountThemeToggle) window.mountThemeToggle();
   }
 

@@ -16,6 +16,18 @@
   left: 0;
 }
 
+/* 헤더/푸터 자리표시자 높이 예약 — layout.js가 채우기 전에도 같은 높이를 차지해,
+   주입되며 본문이 아래로 밀리는 레이아웃 시프트(깜빡임)를 없앤다. */
+[data-site-header] {
+  display: block;
+  min-height: 76px;
+}
+@media (max-width: 786px) {
+  [data-site-header] {
+    min-height: 130px;
+  }
+}
+
 /* 슬림 헤더 */
 .site-header {
   display: flex;
@@ -124,6 +136,12 @@
 }
 
 /* 테마 토글 */
+/* 토글 버튼이 마운트되기 전에도 자리를 차지해 헤더가 밀리지 않게 */
+[data-theme-slot] {
+  display: inline-flex;
+  width: 2.2rem;
+  height: 2.2rem;
+}
 .theme-toggle {
   width: 2.2rem;
   height: 2.2rem;
@@ -221,7 +239,8 @@ body::before {
   );
 }
 
-/* 스크롤 등장 (JS가 .reveal 부여 시에만 숨김 → no-JS 안전) */
+/* 스크롤 등장 — reveal.js가 '접혀서 안 보이는' 섹션에만 .reveal을 부여해 숨긴다.
+   화면에 보이는 섹션엔 부여하지 않아 페이지 전환 시 깜빡임이 없다. no-JS 안전. */
 .reveal {
   opacity: 0;
   transform: translateY(18px);
