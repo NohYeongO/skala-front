@@ -4,21 +4,37 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
+    <meta name="referrer" content="no-referrer" />
     <meta
       http-equiv="Content-Security-Policy"
       content="default-src 'self'; img-src 'self' data:; frame-src https://www.gong-dream.co.kr; object-src 'none'; base-uri 'self'"
     />
     <title>나의 소개 · 노영오 여행 일지</title>
     <script src="../script/theme.js"></script>
-    <link rel="stylesheet" href="../css/tokens.css" />
-    <link rel="stylesheet" href="../css/base.css" />
-    <link rel="stylesheet" href="../css/chrome.css" />
+    <script src="../script/intro.js"></script>
+    <link rel="preload" href="../fonts/PretendardVariable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/intro.css" />
     <link rel="stylesheet" href="../css/profile.css" />
     <script type="module" src="../script/profile.js"></script>
   </head>
   <body data-intro="PROFILE">
-    <header data-site-header></header>
+    <a class="skip-link" href="#main">본문 바로가기</a>
+    <header data-site-header class="site-header">
+      <a class="brand" href="index.html"><b>노영오</b><span class="brand__sub">TRAVEL LOG</span></a>
+      <nav class="site-nav" aria-label="주요 메뉴">
+        <ul>
+          <li><a href="myProfile.html" aria-current="page">나의 소개</a></li>
+          <li><a href="holiday.html">휴일 일과</a></li>
+          <li><a href="myClass.html">강의 일정</a></li>
+          <li><a href="myTrip.html">나의 여행지</a></li>
+        </ul>
+      </nav>
+      <div class="site-header__actions">
+        <span class="auth" id="authArea"><a class="btn-login" href="login.html">로그인</a><a class="btn-signup" href="signUp.html">회원가입</a></span>
+        <span data-theme-slot></span>
+      </div>
+    </header>
 
     <main id="main" class="profile">
       <section class="passport panel" aria-labelledby="passport-name">

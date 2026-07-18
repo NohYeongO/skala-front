@@ -1,0 +1,6 @@
+/* style.css — 전 페이지 공통 진입 스타일시트. 아래 순서가 캐스케이드 기준이다.
+   페이지 전용 CSS(home·profile·auth 등)는 각 페이지에서 이 파일 다음에 링크한다. */
+@import "tokens.css"; /* 디자인 토큰·웹폰트 */
+@import "base.css"; /* 리셋·기본 타이포·접근성 유틸 */
+@import "chrome.css"; /* 헤더/푸터/스킵링크/스크롤 등장 */
+@import "games.css"; /* 미니게임 런처·모달 */
