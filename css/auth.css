@@ -165,7 +165,7 @@
 .auth-msg {
   min-height: 1.4em;
   margin-bottom: var(--space-3);
-  color: #e5484d;
+  color: var(--color-err);
   font-weight: 600;
 }
 .auth-submit {

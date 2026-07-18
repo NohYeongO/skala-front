@@ -34,6 +34,9 @@
 
   --color-mark-bg: #fde68a;
   --color-mark-text: #422006;
+  /* 상태 색 — 본문 크기 텍스트도 AA(4.5:1)를 넘는 값 */
+  --color-ok: #15803d;
+  --color-err: #b91c1c;
 
   /* 타이포 */
   --font-sans: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont,
@@ -99,6 +102,8 @@
 
   --color-mark-bg: #b45309;
   --color-mark-text: #fff7ed;
+  --color-ok: #4ade80;
+  --color-err: #f87171;
 
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 6px 16px rgba(0, 0, 0, 0.45);
@@ -129,6 +134,8 @@
 
     --color-mark-bg: #b45309;
     --color-mark-text: #fff7ed;
+    --color-ok: #4ade80;
+    --color-err: #f87171;
 
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
     --shadow-md: 0 6px 16px rgba(0, 0, 0, 0.45);
