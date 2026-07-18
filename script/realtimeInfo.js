@@ -1,4 +1,5 @@
-// 도시 선택 → 실시간 날씨 표시 (화면 책임)
+// 도시 선택 → 실시간 날씨 표시 (화면 책임).
+// 주의: 8장 모듈 분리 산출물로 보존 — 현재 index 날씨는 journeyLog.js가 담당한다.
 import { fetchWeather } from "./weatherAPI.js";
 
 const select = document.getElementById("city-select");

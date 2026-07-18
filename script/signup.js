@@ -1,6 +1,5 @@
-// 회원가입 폼 검수 후 계정을 localStorage에 저장하고 자동 로그인한다.
-// 아이디·비밀번호를 조건식으로 검사해 명확한 안내를 보여주고,
-// 성공 시 비밀번호가 URL에 남지 않도록 JS로 완료 페이지로 이동한다.
+// 회원가입 검증 → localStorage 저장 → 자동 로그인.
+// 주의: 성공 시 JS로 이동해 비밀번호가 URL(GET 쿼리)에 남지 않게 한다.
 import { registerAccount, login } from "./auth.js";
 
 const form = document.querySelector('form[action="signUpResult.html"]');
