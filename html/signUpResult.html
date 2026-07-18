@@ -3,45 +3,49 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
     <meta name="referrer" content="no-referrer" />
-    <title>회원가입 완료</title>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; object-src 'none'; base-uri 'self'"
+    />
+    <title>회원가입 완료 · 노영오 여행 일지</title>
     <script src="../script/theme.js"></script>
-    <link rel="stylesheet" href="../css/tokens.css" />
-    <link rel="stylesheet" href="../css/base.css" />
-    <link rel="stylesheet" href="../css/components.css" />
-    <link rel="stylesheet" href="../css/layout.css" />
+    <link rel="preload" href="../fonts/PretendardVariable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/auth.css" />
   </head>
   <body>
-    <div class="container">
-    <header>
-      <h1><span aria-hidden="true">🎉</span> 회원가입을 진심으로 축하합니다!</h1>
-      <p>SKALA-FRONT 회원이 되신 것을 환영합니다.</p>
-    </header>
+    <a class="skip-link" href="#result">본문 바로가기</a>
 
-    <main>
-      <section>
-        <h2>안내 사항</h2>
-        <ul>
-          <li>입력하신 이메일 주소로 가입 확인 메일이 발송되었습니다.</li>
-          <li>보안을 위해 첫 로그인 후 비밀번호를 다시 한번 확인해 주세요.</li>
-          <li>작성하신 프로필 정보는 마이페이지에서 언제든지 수정이 가능합니다.</li>
-        </ul>
-      </section>
+    <main class="auth-page">
+      <a class="auth-home-link" href="index.html"><span aria-hidden="true">←</span> 홈으로</a>
+      <span class="auth-toggle" data-theme-slot></span>
 
-      <nav aria-label="이동하기">
-        <h2>이동하기</h2>
-        <p>아래 링크를 클릭하면 이전에 작성한 다른 페이지로 이동할 수 있습니다.</p>
-        <ul>
-          <li><span aria-hidden="true">👤</span> <a href="myProfile.html">나의 프로필 보기</a></li>
-          <li><span aria-hidden="true">🏛️</span> <a href="myClass.html">나의 수업 시간표 보기</a></li>
-          <li><span aria-hidden="true">🌴</span> <a href="holiday.html">나의 휴일 계획 보기</a></li>
-        </ul>
-      </nav>
+      <div class="auth-card" id="result">
+        <div class="auth-card__head auth-card__head--done">
+          <p class="auth-card__brand">노영오 <span>TRAVEL LOG</span></p>
+          <h1 class="auth-card__title"><span aria-hidden="true">🎫</span> 발권 완료</h1>
+          <p class="auth-card__sub">
+            회원가입을 진심으로 축하합니다! 이제 여정을 시작하세요 <span aria-hidden="true">🎉</span>
+          </p>
+        </div>
+
+        <div class="auth-card__body">
+          <ul class="result-notes">
+            <li>이제 로그인하여 여행 일지의 모든 기능을 이용할 수 있습니다.</li>
+            <li>보안을 위해 첫 로그인 후 비밀번호를 다시 한번 확인해 주세요.</li>
+          </ul>
+
+          <nav class="result-links" aria-label="이동하기">
+            <a href="myProfile.html"><span aria-hidden="true">👤</span> 나의 소개</a>
+            <a href="myClass.html"><span aria-hidden="true">🏛️</span> 강의 일정</a>
+            <a href="holiday.html"><span aria-hidden="true">🌴</span> 휴일 일과</a>
+          </nav>
+
+          <a class="auth-home" href="index.html">홈으로 가기</a>
+        </div>
+      </div>
     </main>
-
-    <footer>
-      <p><small>&copy; 2026 SKALA-FRONT · 노영오</small></p>
-    </footer>
-    </div>
   </body>
 </html>

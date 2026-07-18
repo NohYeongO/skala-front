@@ -3,86 +3,115 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>나의 강의 일정</title>
+    <meta name="color-scheme" content="light dark" />
+    <meta name="referrer" content="no-referrer" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'"
+    />
+    <title>강의 일정 · 노영오 여행 일지</title>
     <script src="../script/theme.js"></script>
-    <link rel="stylesheet" href="../css/tokens.css" />
-    <link rel="stylesheet" href="../css/base.css" />
-    <link rel="stylesheet" href="../css/components.css" />
-    <link rel="stylesheet" href="../css/layout.css" />
+    <script src="../script/intro.js"></script>
+    <link rel="preload" href="../fonts/PretendardVariable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/intro.css" />
+    <link rel="stylesheet" href="../css/myClass.css" />
+    <script type="module" src="../script/myClass.js"></script>
   </head>
-  <body>
-    <div class="container">
-    <header>
-      <h1>나의 강의 일정</h1>
-      <p>SKALA 4반(담당교수 류홍걸) 2026년 7월 20일~24일 주간 시간표입니다.</p>
+  <body data-intro="CLASS">
+    <a class="skip-link" href="#main">본문 바로가기</a>
+    <header data-site-header class="site-header">
+      <a class="brand" href="index.html"><b>노영오</b><span class="brand__sub">TRAVEL LOG</span></a>
+      <nav class="site-nav" aria-label="주요 메뉴">
+        <ul>
+          <li><a href="myProfile.html">나의 소개</a></li>
+          <li><a href="holiday.html">휴일 일과</a></li>
+          <li><a href="myClass.html" aria-current="page">강의 일정</a></li>
+          <li><a href="myTrip.html">나의 여행지</a></li>
+        </ul>
+      </nav>
+      <div class="site-header__actions">
+        <span class="auth" id="authArea"><a class="btn-login" href="login.html">로그인</a><a class="btn-signup" href="signUp.html">회원가입</a></span>
+        <span data-theme-slot></span>
+      </div>
     </header>
 
-    <nav aria-label="바로가기">
-      <a href="index.html">← 홈으로</a>
-    </nav>
+    <main id="main" class="schedule">
+      <div class="schedule__intro">
+        <h1>강의 일정 <span class="eyebrow">FLIGHT SCHEDULE</span></h1>
+        <p>
+          SKALA 4반(205호 · 광주) 주간 시간표입니다. 달력에서 날짜를 고르거나 좌우로 넘겨 주차별 강의를
+          확인하세요.
+        </p>
+        <p class="schedule__note"><mark>교수님은 4반 기준입니다.</mark></p>
+      </div>
 
-    <main>
-      <table>
-        <caption>
-          주간 강의 시간표 (2026-07-20 ~ 07-24) — 09:00부터 18:00까지 진행되며,
-          같은 과목이 이어지는 시간과 점심시간은 칸을 합쳐 표시했습니다.
-        </caption>
-        <thead>
-          <tr>
-            <th scope="col">시간</th>
-            <th scope="col">월 (7/20)</th>
-            <th scope="col">화 (7/21)</th>
-            <th scope="col">수 (7/22)</th>
-            <th scope="col">목 (7/23)</th>
-            <th scope="col">금 (7/24)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">09:00 ~ 10:00</th>
-            <td rowspan="3">데이터 분석을 위한 <span lang="en">Python</span> 이해</td>
-            <td rowspan="3">데이터 분석을 위한 <span lang="en">Python</span> 이해</td>
-            <td rowspan="3">스마트 데이터 이해 및 활용</td>
-            <td rowspan="3">스마트 데이터 이해 및 활용</td>
-            <td rowspan="3">스마트 데이터 이해 및 활용</td>
-          </tr>
-          <tr>
-            <th scope="row">10:00 ~ 11:00</th>
-          </tr>
-          <tr>
-            <th scope="row">11:00 ~ 12:00</th>
-          </tr>
-          <tr>
-            <th scope="row">12:00 ~ 13:00</th>
-            <td colspan="5">점심 시간</td>
-          </tr>
-          <tr>
-            <th scope="row">13:00 ~ 14:00</th>
-            <td rowspan="5">데이터 분석을 위한 <span lang="en">Python</span> 이해</td>
-            <td rowspan="5">데이터 분석을 위한 <span lang="en">Python</span> 이해</td>
-            <td rowspan="5">스마트 데이터 이해 및 활용</td>
-            <td rowspan="5">스마트 데이터 이해 및 활용</td>
-            <td rowspan="5">스마트 데이터 이해 및 활용</td>
-          </tr>
-          <tr>
-            <th scope="row">14:00 ~ 15:00</th>
-          </tr>
-          <tr>
-            <th scope="row">15:00 ~ 16:00</th>
-          </tr>
-          <tr>
-            <th scope="row">16:00 ~ 17:00</th>
-          </tr>
-          <tr>
-            <th scope="row">17:00 ~ 18:00</th>
-          </tr>
-        </tbody>
-      </table>
+      <div class="schedule__grid">
+        <aside class="cal" aria-label="주차 선택 달력">
+          <div class="cal__bar">
+            <button type="button" class="cal__nav" data-cal-prev aria-label="이전 달">‹</button>
+            <p class="cal__title" id="calTitle" aria-live="polite">달력</p>
+            <button type="button" class="cal__nav" data-cal-next aria-label="다음 달">›</button>
+          </div>
+          <div class="cal__grid" id="calGrid"></div>
+          <p class="cal__hint">표시된 날짜를 누르면 그 주 강의가 나타납니다.</p>
+        </aside>
+
+        <section class="week" aria-labelledby="weekHeading">
+          <div class="week__bar">
+            <button type="button" class="week__nav" data-week-prev>
+              <span aria-hidden="true">◀</span> 이전 주
+            </button>
+            <h2 class="week__title" id="weekHeading">주간 일정</h2>
+            <button type="button" class="week__nav" data-week-next>
+              다음 주 <span aria-hidden="true">▶</span>
+            </button>
+          </div>
+          <ol class="board" id="board" aria-live="polite"></ol>
+        </section>
+      </div>
+
+      <section class="daily" aria-labelledby="daily-heading" data-reveal>
+        <h2 id="daily-heading">주간 시간표 <span class="eyebrow">WEEKLY TIMETABLE</span></h2>
+        <p class="daily__desc">위에서 선택한 주차의 요일별 수업입니다.</p>
+        <table class="daily__table">
+          <caption class="sr-only">선택한 주차의 요일별 수업 시간표</caption>
+          <thead id="dailyHead">
+            <tr>
+              <th scope="col">시간</th>
+              <th scope="col">월 <span class="daily__date">07.20</span></th>
+              <th scope="col">화 <span class="daily__date">07.21</span></th>
+              <th scope="col">수 <span class="daily__date">07.22</span></th>
+              <th scope="col">목 <span class="daily__date">07.23</span></th>
+              <th scope="col">금 <span class="daily__date">07.24</span></th>
+            </tr>
+          </thead>
+          <tbody id="dailyBody">
+            <tr>
+              <th scope="row">09:00 ~ 12:00<span class="daily__slot">오전 강의</span></th>
+              <td>데이터 분석을 위한 Python 이해</td>
+              <td>데이터 분석을 위한 Python 이해</td>
+              <td>스마트 데이터 이해 및 활용</td>
+              <td>스마트 데이터 이해 및 활용</td>
+              <td>스마트 데이터 이해 및 활용</td>
+            </tr>
+            <tr>
+              <th scope="row">12:00 ~ 13:00<span class="daily__slot">점심</span></th>
+              <td colspan="5" class="daily__lunch">점심시간</td>
+            </tr>
+            <tr>
+              <th scope="row">13:00 ~ 18:00<span class="daily__slot">오후 강의 및 실습</span></th>
+              <td>데이터 분석을 위한 Python 이해</td>
+              <td>데이터 분석을 위한 Python 이해</td>
+              <td>스마트 데이터 이해 및 활용</td>
+              <td>스마트 데이터 이해 및 활용</td>
+              <td>스마트 데이터 이해 및 활용</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
     </main>
 
-    <footer>
-      <p><small>&copy; 2026 SKALA-FRONT · 노영오</small></p>
-    </footer>
-    </div>
+    <footer data-site-foot></footer>
   </body>
 </html>

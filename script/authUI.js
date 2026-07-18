@@ -1,6 +1,4 @@
-// 헤더의 로그인 상태 표시 — 로그인 시 이름+로그아웃, 아니면 로그인+회원가입.
-// 사용자 이름은 textContent로만 넣어 XSS를 원천 차단한다.
-// #authArea는 layout이 주입하므로 호출 시점마다 다시 조회한다.
+// 헤더 로그인 상태 표시. 주의: 사용자 이름은 textContent로만 넣는다(XSS 차단).
 import { getSession, logout } from "./auth.js";
 
 function link(className, href, text) {

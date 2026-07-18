@@ -4,20 +4,35 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
+    <meta name="referrer" content="no-referrer" />
     <meta
       http-equiv="Content-Security-Policy"
       content="default-src 'self'; connect-src 'self' https://api.open-meteo.com; img-src 'self' data:; object-src 'none'; base-uri 'self'"
     />
-    <title>노영오 · 여행 일지 포털</title>
+    <title>Welcome SKALA · 노영오 여행 일지</title>
     <script src="../script/theme.js"></script>
-    <link rel="stylesheet" href="../css/tokens.css" />
-    <link rel="stylesheet" href="../css/base.css" />
-    <link rel="stylesheet" href="../css/chrome.css" />
+    <link rel="preload" href="../fonts/PretendardVariable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/home.css" />
     <script type="module" src="../script/home.js"></script>
   </head>
   <body>
-    <header data-site-header></header>
+    <a class="skip-link" href="#main">본문 바로가기</a>
+    <header data-site-header class="site-header">
+      <a class="brand" href="index.html"><b>노영오</b><span class="brand__sub">TRAVEL LOG</span></a>
+      <nav class="site-nav" aria-label="주요 메뉴">
+        <ul>
+          <li><a href="myProfile.html">나의 소개</a></li>
+          <li><a href="holiday.html">휴일 일과</a></li>
+          <li><a href="myClass.html">강의 일정</a></li>
+          <li><a href="myTrip.html">나의 여행지</a></li>
+        </ul>
+      </nav>
+      <div class="site-header__actions">
+        <span class="auth" id="authArea"><a class="btn-login" href="login.html">로그인</a><a class="btn-signup" href="signUp.html">회원가입</a></span>
+        <span data-theme-slot></span>
+      </div>
+    </header>
 
     <main id="main">
       <h1 class="sr-only">노영오 여행 일지 · 세계 여행 궤적 포털</h1>
@@ -28,7 +43,7 @@
             <!-- 마커·항로·비행기는 journeyMap이 주입 -->
           </div>
         </div>
-        <aside class="hero__log" id="log"><!-- Task 6 --></aside>
+        <aside class="hero__log" id="log"></aside>
         <p id="logStatus" class="sr-only" aria-live="polite"></p>
 
         <div class="hero__controls">
@@ -89,21 +104,13 @@
 
     <dialog class="photo-modal" id="photoModal" aria-labelledby="photo-modal-cap">
       <form method="dialog">
-        <button class="photo-modal__close" value="close" aria-label="닫기">✕</button>
+        <button type="submit" class="photo-modal__close" value="close" aria-label="닫기">✕</button>
       </form>
       <figure class="photo-modal__fig">
         <img id="photo-modal-img" src="" alt="" />
         <span class="photo-modal__stamp" id="photo-modal-stamp" aria-hidden="true"></span>
         <figcaption id="photo-modal-cap" class="photo-modal__cap"></figcaption>
       </figure>
-    </dialog>
-
-    <dialog class="game-modal" id="gameModal" aria-labelledby="game-modal-title">
-      <form method="dialog">
-        <button class="game-modal__close" value="close" aria-label="닫기">✕</button>
-      </form>
-      <h3 id="game-modal-title"></h3>
-      <div id="game-modal-body"></div>
     </dialog>
   </body>
 </html>

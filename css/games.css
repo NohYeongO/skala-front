@@ -1,0 +1,473 @@
+/* 미니게임 — 전 페이지 공용 (플로팅 런처 + 모달 + 게임 콘텐츠) */
+
+/* ── 플로팅 런처(FAB) ── */
+.game-fab {
+  position: fixed;
+  right: var(--space-5);
+  bottom: var(--space-5);
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-3);
+  /* JS 주입 직후 툭 나타나지 않고 슬며시 떠오르게 */
+  animation: fab-in 0.3s ease both;
+}
+@keyframes fab-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.game-fab--hidden {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+}
+.game-fab__toggle {
+  width: 3.5rem;
+  height: 3.5rem;
+  border: none;
+  border-radius: 50%;
+  background: var(--brand);
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-lg);
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+.game-fab__toggle:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+}
+.game-fab__menu {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-lg);
+  animation: fab-pop 0.18s ease;
+}
+.game-fab__menu[hidden] {
+  display: none;
+}
+.game-fab__item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-weight: 700;
+  font-size: var(--fs-300);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.game-fab__item:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+}
+@keyframes fab-pop {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ── 게임 모달 ── */
+.game-modal {
+  position: relative;
+  width: min(420px, 92vw);
+  margin: auto;
+  padding: var(--space-6);
+  border: none;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: var(--shadow-lg);
+}
+.game-modal::backdrop {
+  background: rgba(4, 8, 20, 0.7);
+  backdrop-filter: blur(3px);
+}
+.game-modal[open] {
+  animation: modal-pop 0.3s cubic-bezier(0.2, 1, 0.36, 1);
+}
+.game-modal__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-surface-alt);
+  color: var(--color-text);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.game-modal h3 {
+  margin-bottom: var(--space-4);
+  padding-right: 2rem;
+}
+.game-row {
+  display: flex;
+  gap: var(--space-2);
+  margin: var(--space-4) 0;
+}
+.game-row input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+}
+.game-row button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--brand);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+.game-msg {
+  min-height: 1.5em;
+  font-weight: 700;
+}
+@keyframes modal-pop {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .game-modal[open],
+  .game-fab__menu,
+  .game-fab {
+    animation: none;
+  }
+}
+
+/* 게임 시작 선택 */
+.game-choice {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: var(--space-4) 0;
+}
+.game-choice__btn {
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--color-accent-border);
+  border-radius: var(--radius-md);
+  background: var(--color-accent-soft);
+  color: var(--color-accent-hover);
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+}
+.game-choice__btn:hover {
+  background: var(--brand);
+  color: #fff;
+  text-decoration: none;
+}
+
+/* 랭킹 */
+.rank-title {
+  margin: var(--space-4) 0 var(--space-2);
+  font-size: var(--fs-400);
+}
+.rank-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: rank;
+}
+.rank-list li {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: var(--space-3);
+  align-items: center;
+  margin: 0;
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+.rank-list li::before {
+  counter-increment: rank;
+  content: counter(rank);
+  min-width: 1.4em;
+  font-weight: 700;
+  color: var(--brand);
+}
+
+
+/* ── 성적 계산기 ── */
+.grade__list {
+  list-style: none;
+  margin: var(--space-3) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+.grade__item {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-alt);
+}
+.grade__subject {
+  min-width: 0;
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.grade__score {
+  color: var(--color-muted);
+  font-size: var(--fs-300);
+}
+.grade__badge {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.7em;
+  padding: 0.1rem 0.45rem;
+  border-radius: var(--radius-sm);
+  font-weight: 800;
+  color: #fff;
+}
+.grade__badge--A {
+  background: #15803d;
+}
+.grade__badge--B {
+  background: #2563eb;
+}
+.grade__badge--C {
+  background: #a16207;
+}
+.grade__badge--D {
+  background: #c2410c;
+}
+.grade__badge--F {
+  background: #dc2626;
+}
+.grade__remove {
+  width: 1.7rem;
+  height: 1.7rem;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: var(--color-muted);
+  line-height: 1;
+  cursor: pointer;
+}
+.grade__remove:hover {
+  border-color: var(--color-err);
+  color: var(--color-err);
+}
+.grade__result {
+  margin-top: var(--space-4);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--brand) 8%, var(--color-surface));
+}
+.grade__gpa {
+  margin: 0 0 var(--space-3);
+  font-weight: 700;
+}
+.grade__gpa b {
+  font-size: var(--fs-500);
+}
+.grade__final {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.7em;
+  padding: 0.1rem 0.5rem;
+  border-radius: var(--radius-sm);
+  color: #fff;
+}
+.grade__pass {
+  color: var(--color-ok);
+}
+.grade__pass--fail {
+  color: var(--color-err);
+}
+.grade__save {
+  width: 100%;
+  padding: 0.6rem;
+  border: none;
+  border-radius: 999px;
+  background: var(--brand);
+  color: #fff;
+  font-weight: 800;
+  cursor: pointer;
+}
+.grade__save:hover {
+  filter: brightness(1.08);
+}
+.grade__past-title {
+  margin: var(--space-5) 0 var(--space-2);
+  font-size: var(--fs-400);
+}
+.grade__past {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-2);
+  max-height: 30vh;
+  overflow-y: auto;
+}
+.grade__past-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--fs-300);
+}
+.grade__past-date {
+  font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-weight: 700;
+  color: var(--color-muted);
+}
+.grade__past-item b {
+  padding: 0 0.35rem;
+  border-radius: 4px;
+  color: #fff;
+}
+
+/* ── 내 가방 ── */
+.bag-add {
+  display: flex;
+  gap: var(--space-2);
+  margin: var(--space-4) 0 var(--space-3);
+}
+.bag-add input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+}
+.bag-btn {
+  padding: 0.55rem 1rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--brand);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+.bag-samples-label,
+.bag-title {
+  margin: var(--space-3) 0 var(--space-2);
+  font-weight: 700;
+}
+.bag-samples-label {
+  font-size: var(--fs-300);
+  color: var(--color-muted);
+}
+.bag-title {
+  color: var(--color-text);
+  font-size: var(--fs-400);
+}
+.bag-samples {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.bag-sample {
+  padding: 0.35rem 0.75rem;
+  border: 1px dashed var(--color-border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-muted);
+  font-weight: 600;
+  font-size: var(--fs-300);
+  cursor: pointer;
+}
+.bag-sample:hover {
+  border-style: solid;
+  border-color: var(--brand);
+  color: var(--brand);
+}
+.bag-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-2);
+  max-height: 38vh;
+  overflow-y: auto;
+}
+.bag-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-alt);
+  font-weight: 600;
+}
+.bag-remove {
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface);
+  color: var(--color-muted);
+  font-size: var(--fs-300);
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.bag-remove:hover {
+  border-color: #e5484d;
+  color: #e5484d;
+}
+.bag-empty {
+  color: var(--color-muted);
+  font-size: var(--fs-300);
+}
+
+.bag-count {
+  color: var(--brand);
+  font-weight: 700;
+}

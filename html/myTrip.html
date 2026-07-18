@@ -3,86 +3,197 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>나의 여행지</title>
+    <meta name="color-scheme" content="light dark" />
+    <meta name="referrer" content="no-referrer" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; img-src 'self' data:; media-src 'self'; object-src 'none'; base-uri 'self'"
+    />
+    <title>나의 여행지 · 노영오 여행 일지</title>
     <script src="../script/theme.js"></script>
-    <link rel="stylesheet" href="../css/tokens.css" />
-    <link rel="stylesheet" href="../css/base.css" />
-    <link rel="stylesheet" href="../css/components.css" />
-    <link rel="stylesheet" href="../css/layout.css" />
+    <script src="../script/intro.js"></script>
+    <link rel="preload" href="../fonts/PretendardVariable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/intro.css" />
+    <link rel="stylesheet" href="../css/trip.css" />
+    <script type="module" src="../script/myTrip.js"></script>
   </head>
-  <body>
-    <div class="container">
-    <header>
-      <h1>나의 여행지</h1>
-      <p>여행하며 담은 사진과 음악, 그리고 영상을 한곳에 모았습니다.</p>
+  <body data-intro="ALBUM">
+    <a class="skip-link" href="#main">본문 바로가기</a>
+    <header data-site-header class="site-header">
+      <a class="brand" href="index.html"><b>노영오</b><span class="brand__sub">TRAVEL LOG</span></a>
+      <nav class="site-nav" aria-label="주요 메뉴">
+        <ul>
+          <li><a href="myProfile.html">나의 소개</a></li>
+          <li><a href="holiday.html">휴일 일과</a></li>
+          <li><a href="myClass.html">강의 일정</a></li>
+          <li><a href="myTrip.html" aria-current="page">나의 여행지</a></li>
+        </ul>
+      </nav>
+      <div class="site-header__actions">
+        <span class="auth" id="authArea"><a class="btn-login" href="login.html">로그인</a><a class="btn-signup" href="signUp.html">회원가입</a></span>
+        <span data-theme-slot></span>
+      </div>
     </header>
 
-    <nav aria-label="바로가기">
-      <a href="index.html">← 홈으로</a>
-    </nav>
+    <main id="main" class="trip">
+      <div class="trip__intro">
+        <h1>나의 여행지 <span class="eyebrow">TRAVEL GALLERY</span></h1>
+        <p>여행하며 담은 사진과 음악, 그리고 영상을 한곳에 모았습니다. 사진을 누르면 크게 볼 수 있어요.</p>
+      </div>
 
-    <main>
-      <section aria-labelledby="album-heading">
-        <h2 id="album-heading">
-          <span aria-hidden="true">🌍</span> 나의 여행 앨범 <span aria-hidden="true">🎵</span>
-        </h2>
-        <p>여행 중 콘서트에서 직접 녹음한 배경 음악입니다.</p>
+      <div class="trip__media">
+        <section class="media-card music-card" aria-labelledby="music-h" data-reveal>
+          <div class="media-card__head">
+            <div class="music__art" aria-hidden="true">♪</div>
+            <div class="media-card__meta">
+              <p class="media-card__eyebrow">IN-FLIGHT MUSIC</p>
+              <h2 id="music-h" class="media-card__title">여행 콘서트 라이브</h2>
+              <p class="media-card__sub">여행 중 콘서트에서 직접 녹음한 배경 음악입니다.</p>
+            </div>
+          </div>
+          <div class="media-card__control">
+            <audio class="music__player" controls preload="none">
+              <source src="../media/concert-music.mp3" type="audio/mpeg" />
+              이 브라우저는 오디오 재생을 지원하지 않습니다.
+              <a href="../media/concert-music.mp3">음악 파일 내려받기</a>
+            </audio>
+          </div>
+        </section>
 
-        <audio controls preload="none">
-          <source src="../media/concert-music.mp3" type="audio/mpeg" />
-          이 브라우저는 오디오 재생을 지원하지 않습니다.
-          <a href="../media/concert-music.mp3">음악 파일 내려받기</a>
-        </audio>
+        <section class="media-card vlog-card" aria-labelledby="vlog-h" data-reveal>
+          <div class="media-card__head">
+            <div class="vlog__icon" aria-hidden="true">🎬</div>
+            <div class="media-card__meta">
+              <p class="media-card__eyebrow">TRAVEL VLOG</p>
+              <h2 id="vlog-h" class="media-card__title">야구장 브이로그</h2>
+              <p class="media-card__sub">일본 야구장에서 담은 홈런 순간. 대사 없이 환경음만 있습니다.</p>
+            </div>
+          </div>
+          <div class="media-card__control">
+            <button type="button" class="vlog__play" data-video aria-haspopup="dialog">
+              <span class="vlog__play-circle" aria-hidden="true">▶</span>
+              <span>영상 재생</span>
+            </button>
+          </div>
+        </section>
+      </div>
 
+      <section aria-labelledby="gallery-h" data-reveal>
+        <h2 id="gallery-h" class="trip__h2">여행 앨범 <span class="eyebrow">7 STAMPS</span></h2>
         <ul class="gallery">
-          <li>
-            <figure class="trip-card">
-              <img
-                src="../media/osaka-castle-2026.jpg"
-                alt="밤에 조명을 받아 하얗게 빛나는 오사카성 천수각"
-                loading="lazy"
-              />
-              <figcaption>오사카성 (2026년)</figcaption>
-            </figure>
-          </li>
-          <li>
-            <figure class="trip-card">
+          <li class="gcard">
+            <button type="button" class="gcard__btn" data-cap="파리, 프랑스 · 2020">
               <img
                 src="../media/france-2020.jpg"
                 alt="해질 무렵 크리스마스 조명이 켜진 프랑스 바스크 지방의 마을과 뒤편의 피레네 산맥"
                 loading="lazy"
               />
-              <figcaption>프랑스 (2020년)</figcaption>
-            </figure>
+              <span class="gcard__info">
+                <span class="gcard__place"><b>파리</b><span class="gcard__iata">CDG</span></span>
+                <span class="gcard__meta"><span aria-hidden="true">🇫🇷</span> 2020</span>
+              </span>
+            </button>
           </li>
-          <li>
-            <figure class="trip-card">
+          <li class="gcard">
+            <button type="button" class="gcard__btn" data-cap="산티아고 순례길, 스페인 · 2020">
               <img
                 src="../media/santiago-2020.jpg"
                 alt="산티아고까지 518km 남았음을 알리는 순례길 이정표와 아헤스 마을 풍경"
                 loading="lazy"
               />
-              <figcaption>산티아고 순례길 (2020년)</figcaption>
-            </figure>
+              <span class="gcard__info">
+                <span class="gcard__place"><b>산티아고</b><span class="gcard__iata">SCQ</span></span>
+                <span class="gcard__meta"><span aria-hidden="true">🇪🇸</span> 2020</span>
+              </span>
+            </button>
+          </li>
+          <li class="gcard">
+            <button type="button" class="gcard__btn" data-cap="시드니, 호주 · 2023">
+              <img
+                src="../media/sydney-2023.jpg"
+                alt="파란 하늘 아래 하얀 지붕의 시드니 오페라 하우스와 항구 풍경 (2023년)"
+                loading="lazy"
+              />
+              <span class="gcard__info">
+                <span class="gcard__place"><b>시드니</b><span class="gcard__iata">SYD</span></span>
+                <span class="gcard__meta"><span aria-hidden="true">🇦🇺</span> 2023</span>
+              </span>
+            </button>
+          </li>
+          <li class="gcard">
+            <button type="button" class="gcard__btn" data-cap="타이베이, 대만 · 2025">
+              <img
+                src="../media/Taipei-2025.jpg"
+                alt="붉은 홍등이 줄지어 걸린 타이베이 골목 풍경 (2025년)"
+                loading="lazy"
+              />
+              <span class="gcard__info">
+                <span class="gcard__place"><b>타이베이</b><span class="gcard__iata">TPE</span></span>
+                <span class="gcard__meta"><span aria-hidden="true">🇹🇼</span> 2025</span>
+              </span>
+            </button>
+          </li>
+          <li class="gcard">
+            <button type="button" class="gcard__btn" data-cap="발리, 인도네시아 · 2025">
+              <img
+                src="../media/bali-2025.jpg"
+                alt="에메랄드빛 바다와 초록 절벽이 이어진 발리 해변 (2025년)"
+                loading="lazy"
+              />
+              <span class="gcard__info">
+                <span class="gcard__place"><b>발리</b><span class="gcard__iata">DPS</span></span>
+                <span class="gcard__meta"><span aria-hidden="true">🇮🇩</span> 2025</span>
+              </span>
+            </button>
+          </li>
+          <li class="gcard">
+            <button type="button" class="gcard__btn" data-cap="오사카, 일본 · 2026">
+              <img
+                src="../media/osaka-castle-2026.jpg"
+                alt="밤에 조명을 받아 하얗게 빛나는 오사카성 천수각"
+                loading="lazy"
+              />
+              <span class="gcard__info">
+                <span class="gcard__place"><b>오사카</b><span class="gcard__iata">KIX</span></span>
+                <span class="gcard__meta"><span aria-hidden="true">🇯🇵</span> 2026</span>
+              </span>
+            </button>
+          </li>
+          <li class="gcard">
+            <button type="button" class="gcard__btn" data-cap="나트랑, 베트남 · 2026">
+              <img
+                src="../media/vietnam-2026.jpg"
+                alt="야자수 사이로 해가 지는 나트랑의 노을과 수영장 (2026년)"
+                loading="lazy"
+              />
+              <span class="gcard__info">
+                <span class="gcard__place"><b>나트랑</b><span class="gcard__iata">CXR</span></span>
+                <span class="gcard__meta"><span aria-hidden="true">🇻🇳</span> 2026</span>
+              </span>
+            </button>
           </li>
         </ul>
       </section>
-
-      <section aria-labelledby="vlog-heading">
-        <h2 id="vlog-heading"><span aria-hidden="true">🎬</span> 나의 여행 브이로그</h2>
-        <p>일본에서 관람한 야구 경기의 홈런 순간을 담은 영상입니다. 대사 없이 환경음만 있는 영상입니다.</p>
-
-        <video controls preload="metadata" width="480">
-          <source src="../media/japan-baseball.mp4" type="video/mp4" />
-          이 브라우저는 비디오 재생을 지원하지 않습니다.
-          <a href="../media/japan-baseball.mp4">영상 파일 내려받기</a>
-        </video>
-      </section>
     </main>
 
-    <footer>
-      <p><small>&copy; 2026 SKALA-FRONT · 노영오</small></p>
-    </footer>
-    </div>
+    <footer data-site-foot></footer>
+
+    <dialog class="lightbox" id="lightbox" aria-label="여행 사진 크게 보기">
+      <button type="button" class="lightbox__close" data-close aria-label="닫기">✕</button>
+      <figure class="lightbox__fig">
+        <img id="lightbox-img" src="" alt="" />
+        <figcaption id="lightbox-cap"></figcaption>
+      </figure>
+    </dialog>
+
+    <dialog class="video-modal" id="videoModal" aria-label="여행 브이로그 영상">
+      <button type="button" class="video-modal__close" data-close aria-label="닫기">✕</button>
+      <video id="videoModalPlayer" controls playsinline preload="none">
+        <source src="../media/japan-baseball.mp4" type="video/mp4" />
+        이 브라우저는 비디오 재생을 지원하지 않습니다.
+        <a href="../media/japan-baseball.mp4">영상 파일 내려받기</a>
+      </video>
+    </dialog>
   </body>
 </html>

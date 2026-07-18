@@ -1,33 +1,15 @@
-// 미니 게임 3종 — 로그인/비회원 이름으로 시작하고, 결과·랭킹을 localStorage에 저장한다.
-// 사용자 이름/닉네임은 escapeHTML로 감싸 innerHTML XSS를 막는다.
+// 미니게임 오케스트레이터 — 전 페이지 플로팅 런처(FAB)로 실행한다.
+// 주의: 홈 아케이드가 화면에 보이면 FAB는 숨긴다(중복 방지).
 import { getSession } from "./auth.js";
-import { escapeHTML } from "./util.js";
+import { ensureModal, openModal } from "./gameModal.js";
+import { startUpDown } from "./upDown.js";
+import { startGrade } from "./grade.js";
+import { startBag } from "./bag.js";
 
-const modal = document.getElementById("gameModal");
-const titleEl = document.getElementById("game-modal-title");
-const bodyEl = document.getElementById("game-modal-body");
-
-// 비회원 닉네임은 메모리에만 둔다 — 새로고침하면 사라지고, 로그인 상태로 오해되지 않는다.
+// 비회원 닉네임은 메모리에만 둔다(새로고침 시 사라지고 로그인으로 오해되지 않음).
 let guestName = null;
 
-function openModal(title, html) {
-  const trigger = document.activeElement;
-  titleEl.textContent = title;
-  bodyEl.innerHTML = html;
-  if (typeof modal.showModal === "function") {
-    modal.showModal();
-    // 닫을 때 포커스를 열었던 요소로 되돌린다 (접근성)
-    modal.addEventListener(
-      "close",
-      () => {
-        if (trigger && typeof trigger.focus === "function") trigger.focus();
-      },
-      { once: true }
-    );
-  }
-}
-
-// 로그인 상태면 그 이름으로, 아니면 회원(로그인) / 비회원(닉네임) 선택
+// ── 플레이어 게이트 ──
 function requirePlayer(start) {
   const session = getSession();
   const name = session ? session.name : guestName;
@@ -61,136 +43,62 @@ function requirePlayer(start) {
   });
 }
 
-// 랭킹 (localStorage) — 값이 작을수록 좋은 게임(업다운)
-function getRank(key) {
-  try {
-    return JSON.parse(localStorage.getItem(key)) || [];
-  } catch (error) {
-    return [];
-  }
+const GAMES = { updown: startUpDown, calc: startGrade, bag: startBag };
+function launch(key) {
+  const start = GAMES[key];
+  if (start) requirePlayer(start);
 }
 
-function saveRank(key, name, score) {
-  const list = getRank(key);
-  const existing = list.find((row) => row.name === name);
-  if (existing) {
-    if (score < existing.score) existing.score = score;
-  } else {
-    list.push({ name, score });
-  }
-  list.sort((a, b) => a.score - b.score);
-  try {
-    localStorage.setItem(key, JSON.stringify(list.slice(0, 10)));
-  } catch (error) {
-    // 무시
-  }
-}
+// ── 플로팅 런처(FAB) ──
+function ensureLauncher() {
+  const existing = document.querySelector(".game-fab");
+  if (existing) return existing;
+  const fab = document.createElement("div");
+  fab.className = "game-fab";
+  fab.innerHTML =
+    '<div class="game-fab__menu" id="gameFabMenu" hidden>' +
+    '<button type="button" class="game-fab__item" data-game="updown"><span aria-hidden="true">🎮</span> 업다운</button>' +
+    '<button type="button" class="game-fab__item" data-game="calc"><span aria-hidden="true">📊</span> 성적 계산기</button>' +
+    '<button type="button" class="game-fab__item" data-game="bag"><span aria-hidden="true">🎒</span> 내 가방</button>' +
+    "</div>" +
+    '<button type="button" class="game-fab__toggle" id="gameFabToggle" aria-expanded="false" aria-haspopup="true" aria-label="미니게임 열기"><span aria-hidden="true">🕹️</span></button>';
+  document.body.appendChild(fab);
 
-function rankBlock(key, unit) {
-  const list = getRank(key).slice(0, 5);
-  const rows = list.length
-    ? `<ol class="rank-list">${list
-        .map((row) => `<li><span>${escapeHTML(row.name)}</span><span>${row.score}${unit}</span></li>`)
-        .join("")}</ol>`
-    : '<p class="game-msg">아직 기록이 없습니다.</p>';
-  return `<h4 class="rank-title"><span aria-hidden="true">🏆</span> 랭킹</h4>${rows}`;
-}
-
-// 업다운 게임 — 1~100 숫자 맞히기, 최소 시도 횟수를 랭킹에 기록
-function startUpDown(name) {
-  const answer = 1 + Math.floor(Math.random() * 100);
-  let tries = 0;
-  openModal(
-    "업다운 게임 🎮",
-    `<p>${escapeHTML(name)}님, 1~100 사이 숫자를 맞혀보세요.</p>
-     <p class="game-row">
-       <input type="number" id="ud-input" min="1" max="100" inputmode="numeric" aria-label="추측 숫자" />
-       <button type="button" id="ud-go">확인</button>
-     </p>
-     <p id="ud-msg" class="game-msg" aria-live="polite"></p>
-     <div id="ud-rank">${rankBlock("skala-rank-updown", "회")}</div>`
-  );
-  const input = document.getElementById("ud-input");
-  const msg = document.getElementById("ud-msg");
-  input.focus();
-
-  function guess() {
-    const value = Number(input.value);
-    if (!value || value < 1 || value > 100) {
-      msg.textContent = "1~100 사이 숫자를 입력하세요.";
-      return;
-    }
-    tries += 1;
-    if (value === answer) {
-      msg.textContent = `🎉 정답! ${tries}회 만에 맞혔습니다.`;
-      input.disabled = true;
-      saveRank("skala-rank-updown", name, tries);
-      document.getElementById("ud-rank").innerHTML = rankBlock("skala-rank-updown", "회");
-    } else {
-      msg.textContent = value < answer ? `⬆️ 더 큰 숫자 (${tries}회)` : `⬇️ 더 작은 숫자 (${tries}회)`;
-      input.value = "";
-      input.focus();
-    }
-  }
-
-  document.getElementById("ud-go").addEventListener("click", guess);
-  input.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") guess();
+  const toggle = fab.querySelector("#gameFabToggle");
+  const menu = fab.querySelector("#gameFabMenu");
+  const setOpen = (open) => {
+    menu.hidden = !open;
+    toggle.setAttribute("aria-expanded", String(open));
+  };
+  toggle.addEventListener("click", () => setOpen(menu.hidden));
+  menu.addEventListener("click", (event) => {
+    const btn = event.target.closest("[data-game]");
+    if (!btn) return;
+    setOpen(false);
+    launch(btn.dataset.game);
   });
-}
-
-// 성적 계산기 — 쉼표로 구분한 점수의 평균과 학점
-function startGrade(name) {
-  openModal(
-    "성적 계산기 📊",
-    `<p>${escapeHTML(name)}님, 점수를 쉼표로 구분해 입력하세요. (예: 90, 85, 100)</p>
-     <p class="game-row">
-       <input type="text" id="gr-input" aria-label="점수 목록" />
-       <button type="button" id="gr-go">계산</button>
-     </p>
-     <p id="gr-msg" class="game-msg" aria-live="polite"></p>`
-  );
-  const input = document.getElementById("gr-input");
-  const msg = document.getElementById("gr-msg");
-  input.focus();
-
-  function calculate() {
-    const scores = input.value
-      .split(",")
-      .map((part) => Number(part.trim()))
-      .filter((score) => !Number.isNaN(score));
-    if (!scores.length) {
-      msg.textContent = "숫자를 입력하세요.";
-      return;
-    }
-    const average = scores.reduce((sum, score) => sum + score, 0) / scores.length;
-    const grade =
-      average >= 90 ? "A" : average >= 80 ? "B" : average >= 70 ? "C" : average >= 60 ? "D" : "F";
-    msg.textContent = `평균 ${average.toFixed(1)}점 · 학점 ${grade}`;
-  }
-
-  document.getElementById("gr-go").addEventListener("click", calculate);
-  input.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") calculate();
+  document.addEventListener("click", (event) => {
+    if (!fab.contains(event.target)) setOpen(false);
   });
+  return fab;
 }
 
-// 내 가방 보기 — 여행 가방 속 물건 목록
-function startBag(name) {
-  const items = ["여권", "노트북", "카메라", "여행용 어댑터", "이어폰", "텀블러"];
-  openModal(
-    "내 가방 보기 🎒",
-    `<p>${escapeHTML(name)}님의 여행 가방 속 물건들:</p>
-     <ul class="game-list">${items.map((item) => `<li>${item}</li>`).join("")}</ul>`
-  );
-}
+// ── 초기화 ──
+ensureModal();
+const fab = ensureLauncher();
 
+// 홈의 아케이드 캐비닛과 연동 + 아케이드가 보이면 FAB 숨김
 document.getElementById("upDownBtn")?.addEventListener("click", () => requirePlayer(startUpDown));
 document.getElementById("gradeBtn")?.addEventListener("click", () => requirePlayer(startGrade));
 document.getElementById("bagBtn")?.addEventListener("click", () => requirePlayer(startBag));
 
-if (modal) {
-  modal.addEventListener("click", (event) => {
-    if (event.target === modal) modal.close();
-  });
+const arcade = document.querySelector(".arcade");
+if (arcade && "IntersectionObserver" in window) {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) fab.classList.toggle("game-fab--hidden", entry.isIntersecting);
+    },
+    { threshold: 0.15 }
+  );
+  observer.observe(arcade);
 }

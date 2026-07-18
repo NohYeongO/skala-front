@@ -3,6 +3,15 @@
   const root = document.documentElement;
   const KEY = "skala-theme";
 
+  // index 브랜드 페이드인은 세션당 1회만 — 매 이동마다 재생되면 깜빡임처럼 보인다
+  try {
+    const isIndex = /(?:^|\/)(index\.html)?$/.test(location.pathname);
+    if (isIndex && !sessionStorage.getItem("skala-brand-in")) {
+      sessionStorage.setItem("skala-brand-in", "1");
+      root.classList.add("brand-in");
+    }
+  } catch (e) {}
+
   function stored() {
     try {
       return localStorage.getItem(KEY);
@@ -51,10 +60,9 @@
     const slot = document.querySelector("[data-theme-slot]");
     (slot || document.body).appendChild(btn);
   }
-  // layout.js가 헤더를 주입한 직후 명시적으로 호출한다(마운트 순서 명확화).
-  // appendChild는 같은 노드를 재배치하므로 여러 번 불려도 버튼은 하나다.
+  // 주의: appendChild는 같은 노드를 재배치하므로 여러 번 불려도 버튼은 하나다
   window.mountThemeToggle = mount;
-  // layout이 없는 정적 슬롯 페이지(로그인/회원가입)를 위한 폴백
+  // layout.js가 없는 페이지(로그인/회원가입)를 위한 폴백
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", mount);
   } else {
