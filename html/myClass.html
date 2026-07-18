@@ -4,21 +4,37 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
+    <meta name="referrer" content="no-referrer" />
     <meta
       http-equiv="Content-Security-Policy"
       content="default-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'"
     />
     <title>강의 일정 · 노영오 여행 일지</title>
     <script src="../script/theme.js"></script>
-    <link rel="stylesheet" href="../css/tokens.css" />
-    <link rel="stylesheet" href="../css/base.css" />
-    <link rel="stylesheet" href="../css/chrome.css" />
+    <script src="../script/intro.js"></script>
+    <link rel="preload" href="../fonts/PretendardVariable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/intro.css" />
     <link rel="stylesheet" href="../css/myClass.css" />
     <script type="module" src="../script/myClass.js"></script>
   </head>
   <body data-intro="CLASS">
-    <header data-site-header></header>
+    <a class="skip-link" href="#main">본문 바로가기</a>
+    <header data-site-header class="site-header">
+      <a class="brand" href="index.html"><b>노영오</b><span class="brand__sub">TRAVEL LOG</span></a>
+      <nav class="site-nav" aria-label="주요 메뉴">
+        <ul>
+          <li><a href="myProfile.html">나의 소개</a></li>
+          <li><a href="holiday.html">휴일 일과</a></li>
+          <li><a href="myClass.html" aria-current="page">강의 일정</a></li>
+          <li><a href="myTrip.html">나의 여행지</a></li>
+        </ul>
+      </nav>
+      <div class="site-header__actions">
+        <span class="auth" id="authArea"><a class="btn-login" href="login.html">로그인</a><a class="btn-signup" href="signUp.html">회원가입</a></span>
+        <span data-theme-slot></span>
+      </div>
+    </header>
 
     <main id="main" class="schedule">
       <div class="schedule__intro">
@@ -54,6 +70,46 @@
           <ol class="board" id="board" aria-live="polite"></ol>
         </section>
       </div>
+
+      <section class="daily" aria-labelledby="daily-heading" data-reveal>
+        <h2 id="daily-heading">주간 시간표 <span class="eyebrow">WEEKLY TIMETABLE</span></h2>
+        <p class="daily__desc">위에서 선택한 주차의 요일별 수업입니다.</p>
+        <table class="daily__table">
+          <caption class="sr-only">선택한 주차의 요일별 수업 시간표</caption>
+          <thead id="dailyHead">
+            <tr>
+              <th scope="col">시간</th>
+              <th scope="col">월 <span class="daily__date">07.20</span></th>
+              <th scope="col">화 <span class="daily__date">07.21</span></th>
+              <th scope="col">수 <span class="daily__date">07.22</span></th>
+              <th scope="col">목 <span class="daily__date">07.23</span></th>
+              <th scope="col">금 <span class="daily__date">07.24</span></th>
+            </tr>
+          </thead>
+          <tbody id="dailyBody">
+            <tr>
+              <th scope="row">09:00 ~ 12:00<span class="daily__slot">오전 강의</span></th>
+              <td>데이터 분석을 위한 Python 이해</td>
+              <td>데이터 분석을 위한 Python 이해</td>
+              <td>스마트 데이터 이해 및 활용</td>
+              <td>스마트 데이터 이해 및 활용</td>
+              <td>스마트 데이터 이해 및 활용</td>
+            </tr>
+            <tr>
+              <th scope="row">12:00 ~ 13:00<span class="daily__slot">점심</span></th>
+              <td colspan="5" class="daily__lunch">점심시간</td>
+            </tr>
+            <tr>
+              <th scope="row">13:00 ~ 18:00<span class="daily__slot">오후 강의 및 실습</span></th>
+              <td>데이터 분석을 위한 Python 이해</td>
+              <td>데이터 분석을 위한 Python 이해</td>
+              <td>스마트 데이터 이해 및 활용</td>
+              <td>스마트 데이터 이해 및 활용</td>
+              <td>스마트 데이터 이해 및 활용</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
     </main>
 
     <footer data-site-foot></footer>

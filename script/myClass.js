@@ -3,7 +3,6 @@
 import { SCHEDULE } from "./scheduleData.js";
 import { escapeHTML } from "./util.js";
 import "./layout.js"; // 공통 헤더/푸터
-import "./intro.js"; // 출국 수속 인트로 (KWJ ✈ CLASS)
 
 const DOW = ["일", "월", "화", "수", "목", "금", "토"];
 
@@ -103,11 +102,44 @@ function renderWeek() {
   board.innerHTML = w.days.map(dayRow).join("");
   prevWeekBtn.disabled = weekIndex === 0;
   nextWeekBtn.disabled = weekIndex === SCHEDULE.length - 1;
+  renderDaily(w);
   // 달력을 이 주가 속한 달로 맞춘다
   const fd = parseDate(first);
   calYear = fd.getFullYear();
   calMonth = fd.getMonth();
   renderCalendar();
+}
+
+// ── 주간 시간표 — 선택한 주차의 수업을 요일별 열로 그린다 (점심만 병합) ──
+function renderDaily(w) {
+  const head = document.getElementById("dailyHead");
+  const body = document.getElementById("dailyBody");
+  if (!head || !body) return;
+  const cols = w.days
+    .map((d) => `<th scope="col">${d.dow} <span class="daily__date">${fmtMD(d.date)}</span></th>`)
+    .join("");
+  head.innerHTML = `<tr><th scope="col">시간</th>${cols}</tr>`;
+
+  const cell = (d, suffix) =>
+    d.type === "holiday"
+      ? '<td class="daily__off">휴무</td>'
+      : `<td>${escapeHTML(d.course)}${suffix}` +
+        (d.prof ? `<span class="daily__prof">${escapeHTML(d.prof)}</span>` : "") +
+        "</td>";
+
+  body.innerHTML = `
+    <tr>
+      <th scope="row">09:00 ~ 12:00<span class="daily__slot">오전 강의</span></th>
+      ${w.days.map((d) => cell(d, "")).join("")}
+    </tr>
+    <tr>
+      <th scope="row">12:00 ~ 13:00<span class="daily__slot">점심</span></th>
+      <td colspan="${w.days.length}" class="daily__lunch">점심시간</td>
+    </tr>
+    <tr>
+      <th scope="row">13:00 ~ 18:00<span class="daily__slot">오후 강의 및 실습</span></th>
+      ${w.days.map((d) => cell(d, "")).join("")}
+    </tr>`;
 }
 
 // ── 달력 ──
