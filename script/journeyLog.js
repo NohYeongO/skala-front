@@ -1,6 +1,4 @@
-// 여정 로그 — 선택한 도시를 탑승권(Boarding Pass)으로 표시한다.
-// 도시 코드(IATA)는 분할플랩으로 뒤집히고, 날씨는 API로 가져온다.
-// 여행지는 "여행 사진 보기"로 모달에서 사진을 크게 본다.
+// 여정 로그 — 선택한 도시를 탑승권으로 표시 (분할플랩 도시 코드 + 실시간 날씨).
 import { fetchWeather } from "./weatherAPI.js";
 
 const log = document.getElementById("log");
@@ -23,7 +21,8 @@ function announce(text) {
 
 export function showHint() {
   log.innerHTML =
-    '<div class="log-hint"><p><span aria-hidden="true">📍</span> 지도의 도시를 클릭해<br />여정을 확인하세요</p></div>';
+    '<div class="log-hint"><p class="log-hint__welcome">스칼라에 오신 것을 환영합니다.</p>' +
+    '<p><span aria-hidden="true">📍</span> 지도의 도시를 클릭해<br />여정을 확인하세요</p></div>';
 }
 
 export async function showCity(city) {
@@ -125,6 +124,7 @@ async function mountWeather(city) {
   try {
     let weather = readWeatherCache(cacheKey);
     if (!weather) {
+      announce(`${city.name} 날씨 불러오는 중`);
       weather = await fetchWeather(city.lat, city.lon);
       writeWeatherCache(cacheKey, weather);
     }
