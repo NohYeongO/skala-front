@@ -1,0 +1,108 @@
+/* 디자인 토큰 · 웹폰트 */
+
+@font-face {
+  font-family: "Pretendard Variable";
+  font-weight: 45 920;
+  font-style: normal;
+  font-display: swap;
+  src: url("../fonts/PretendardVariable.woff2") format("woff2-variations");
+}
+
+:root {
+  /* 색상 */
+  --color-bg: #f6f6fb;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f1f0f9;
+  --color-text: #1c1a2e;
+  --color-muted: #56526c;
+  --color-border: #e5e3f0;
+
+  --color-accent: #6d28d9;
+  --color-accent-hover: #5b21b6;
+  --color-accent-contrast: #ffffff;
+  --color-accent-soft: #ede9fe;
+  --color-accent-border: #c4b5fd;
+
+  --color-mark-bg: #fde68a;
+  --color-mark-text: #422006;
+
+  /* 타이포 */
+  --font-sans: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont,
+    "Apple SD Gothic Neo", "Segoe UI", "Malgun Gothic", sans-serif;
+  --fs-300: 0.875rem;
+  --fs-400: 1rem;
+  --fs-500: 1.125rem;
+  --fs-600: 1.375rem;
+  --fs-700: clamp(1.5rem, 1.2rem + 1.4vw, 2rem);
+  --fs-800: clamp(2rem, 1.5rem + 2.4vw, 2.75rem);
+  --line-body: 1.7;
+  --line-tight: 1.3;
+
+  /* 간격 */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+
+  /* 형태 */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --shadow-sm: 0 1px 2px rgba(28, 26, 46, 0.06), 0 1px 3px rgba(28, 26, 46, 0.08);
+  --shadow-md: 0 6px 16px rgba(28, 26, 46, 0.08), 0 2px 6px rgba(28, 26, 46, 0.06);
+  --shadow-lg: 0 18px 40px rgba(28, 26, 46, 0.14);
+
+  /* 레이아웃 */
+  --container-width: 64rem;
+}
+
+/* 다크 테마 값 (수동 토글) */
+:root[data-theme="dark"] {
+  --color-bg: #14131c;
+  --color-surface: #1e1c29;
+  --color-surface-alt: #272438;
+  --color-text: #f0eef7;
+  --color-muted: #b6b1cf;
+  --color-border: #322e45;
+
+  --color-accent: #a78bfa;
+  --color-accent-hover: #c4b5fd;
+  --color-accent-contrast: #16121f;
+  --color-accent-soft: #2a2444;
+  --color-accent-border: #4c3f7a;
+
+  --color-mark-bg: #b45309;
+  --color-mark-text: #fff7ed;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 6px 16px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 18px 40px rgba(0, 0, 0, 0.55);
+}
+
+/* OS가 다크이고 사용자가 라이트로 고정하지 않았으면 자동 적용 */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg: #14131c;
+    --color-surface: #1e1c29;
+    --color-surface-alt: #272438;
+    --color-text: #f0eef7;
+    --color-muted: #b6b1cf;
+    --color-border: #322e45;
+
+    --color-accent: #a78bfa;
+    --color-accent-hover: #c4b5fd;
+    --color-accent-contrast: #16121f;
+    --color-accent-soft: #2a2444;
+    --color-accent-border: #4c3f7a;
+
+    --color-mark-bg: #b45309;
+    --color-mark-text: #fff7ed;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 6px 16px rgba(0, 0, 0, 0.45);
+    --shadow-lg: 0 18px 40px rgba(0, 0, 0, 0.55);
+  }
+}

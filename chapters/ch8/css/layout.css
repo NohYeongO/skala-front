@@ -1,0 +1,67 @@
+/* 레이아웃 · 반응형 */
+
+/* main·aside 내부 카드 세로 간격 */
+main,
+aside {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+/* 포털 Hub — main·aside 가로 2단 */
+.container:has(> aside) {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  grid-template-areas:
+    "header header"
+    "nav    nav"
+    "main   aside"
+    "footer footer";
+  align-items: start;
+}
+
+.container:has(> aside) > header {
+  grid-area: header;
+}
+.container:has(> aside) > nav {
+  grid-area: nav;
+}
+.container:has(> aside) > main {
+  grid-area: main;
+}
+.container:has(> aside) > aside {
+  grid-area: aside;
+}
+.container:has(> aside) > footer {
+  grid-area: footer;
+}
+
+/* 여행 사진 갤러리 — 3열 */
+.gallery {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+
+/* 스마트폰 (786px 이하) */
+@media (max-width: 786px) {
+  .container:has(> aside) {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "nav"
+      "main"
+      "aside"
+      "footer";
+  }
+
+  nav[aria-label="주요 메뉴"] ul {
+    flex-direction: column;
+  }
+
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+}

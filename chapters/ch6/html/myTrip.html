@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>나의 여행지</title>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+    <header>
+      <h1>나의 여행지</h1>
+      <p>여행하며 담은 사진과 음악, 그리고 영상을 한곳에 모았습니다.</p>
+    </header>
+
+    <nav aria-label="바로가기">
+      <a href="index.html">← 홈으로</a>
+    </nav>
+
+    <main>
+      <section aria-labelledby="album-heading">
+        <h2 id="album-heading">
+          <span aria-hidden="true">🌍</span> 나의 여행 앨범 <span aria-hidden="true">🎵</span>
+        </h2>
+        <p>여행 중 콘서트에서 직접 녹음한 배경 음악입니다.</p>
+
+        <audio controls preload="none">
+          <source src="../media/concert-music.mp3" type="audio/mpeg" />
+          이 브라우저는 오디오 재생을 지원하지 않습니다.
+          <a href="../media/concert-music.mp3">음악 파일 내려받기</a>
+        </audio>
+
+        <ul class="gallery">
+          <li>
+            <figure class="trip-card">
+              <img
+                src="../media/osaka-castle-2026.jpg"
+                alt="밤에 조명을 받아 하얗게 빛나는 오사카성 천수각"
+                loading="lazy"
+              />
+              <figcaption>오사카성 (2026년)</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="trip-card">
+              <img
+                src="../media/france-2020.jpg"
+                alt="해질 무렵 크리스마스 조명이 켜진 프랑스 바스크 지방의 마을과 뒤편의 피레네 산맥"
+                loading="lazy"
+              />
+              <figcaption>프랑스 (2020년)</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="trip-card">
+              <img
+                src="../media/santiago-2020.jpg"
+                alt="산티아고까지 518km 남았음을 알리는 순례길 이정표와 아헤스 마을 풍경"
+                loading="lazy"
+              />
+              <figcaption>산티아고 순례길 (2020년)</figcaption>
+            </figure>
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="vlog-heading">
+        <h2 id="vlog-heading"><span aria-hidden="true">🎬</span> 나의 여행 브이로그</h2>
+        <p>일본에서 관람한 야구 경기의 홈런 순간을 담은 영상입니다. 대사 없이 환경음만 있는 영상입니다.</p>
+
+        <video controls preload="metadata" width="480">
+          <source src="../media/japan-baseball.mp4" type="video/mp4" />
+          이 브라우저는 비디오 재생을 지원하지 않습니다.
+          <a href="../media/japan-baseball.mp4">영상 파일 내려받기</a>
+        </video>
+      </section>
+    </main>
+
+    <footer>
+      <p><small>&copy; 2026 SKALA-FRONT · 노영오</small></p>
+    </footer>
+    </div>
+  </body>
+</html>

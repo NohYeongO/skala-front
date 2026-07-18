@@ -1,0 +1,5 @@
+/* style.css — 모든 페이지 공통 진입 스타일시트 */
+@import "tokens.css";
+@import "base.css";
+@import "components.css";
+@import "layout.css";
