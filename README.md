@@ -1,4 +1,4 @@
-# SKALA-FRONT · 여행 일지 포털
+# SKALA-FRONT
 
 순수 HTML/CSS/JavaScript로만 만든 개인 포털입니다. 강의 8개 챕터를 따라 하나의 사이트를
 점진적으로 발전시키고, 마지막에 **여행 일지(Travel Log)** 테마로 전면 리뉴얼했습니다.
